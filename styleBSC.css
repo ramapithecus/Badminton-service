@@ -1,0 +1,80 @@
+.green {
+    font-size: 15pt;
+    background-color: seagreen;
+    display: grid;
+}
+.head{
+  background-color: black;
+  color: white;
+  border: 0.15em inset whitesmoke;
+  margin-bottom: 0.4em;
+}
+.game{
+  display: flex;
+  background-color: blue;
+  border: 0.12em solid ghostwhite;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-content: center;
+  align-items:center;
+}
+.butt{
+  
+}
+.startButt{
+  width: 6.6em;
+  height: 2em;
+  color: black;
+  background-color: wheat;
+  border: 0.2em ridge olive;
+  border-radius: 35%;
+  transform: translate(110px,-90px);
+  text-transform: capitalize;
+}
+#starterButt{
+  background-color: yellow;
+}
+.imgCock{
+
+border-radius: 70%;
+border-bottom: 30px solid blanchedalmond;
+border-left: 15px solid transparent;
+border-right: 15px solid transparent;
+  width: 0;
+  height:0;
+}
+.players{
+  text-align: center;
+  background-color: orchid;
+  color:#31413E;/*like black*/
+  border: .11em  solid black;
+  border-radius: 50% ;
+  margin: 1.6em;
+  width: 4em;
+  height: 4em;
+  
+}
+.netLine{
+  height: 0.5em;
+  width: 90%;
+  border-top:0.9em dashed black;
+  border-left: 0.5em solid black;
+  border-bottom: 0.9em dashed black;
+  border-right: 0.5em solid black;
+  outline: 0.2em solid white; 
+}
+.divWinner{
+  width: 100%;
+  height: 20em;
+  background-color: orange;
+  border: 0.3em solid red;
+  z-index: 100;
+  transform: translateY(-20em);
+}
+.btnTry{
+  height: 2.6em;
+  width: 4.3em;
+  border-radius: 25% 50%;
+  color: purple;
+}
