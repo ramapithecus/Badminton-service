@@ -1,0 +1,45 @@
+.kurtik{
+    background-color: lawngreen;
+    border: 0.18em solid brown;
+    color: black;
+    font-size: 1.2em;
+}
+.head{
+    color: burlywood;
+    font-size: 1.1em ;
+    
+}
+.game{
+    width: 65vw;
+    height: 100vh;
+    background-image: url('court.webp');
+    background-repeat: no-repeat;
+    
+
+}
+.player{
+    display : flex;
+    flex-direction : column;
+    justify-content : center;
+    align-items: center;
+    height: 2.4em;
+    width: 2.4em;
+    border-radius: 50%;
+    border: 0.15em solid brown;
+    margin: 0.12em;
+}
+    .red{    
+    background-color: red;
+}
+.blue{
+    
+    background-color: blue;
+}
+.orange{
+    
+    background-color: darkorange;
+}
+.yell{
+    
+    background-color: yellow;
+}
