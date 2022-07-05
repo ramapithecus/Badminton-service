@@ -20,7 +20,8 @@
   align-items:center;
 }
 .butt{
-  
+  background-color: grey;
+    visibility : hidden;
 }
 .startButt{
   width: 6.6em;
@@ -33,11 +34,11 @@
   text-transform: capitalize;
 }
 #starterButt{
-  background-color: yellow;
+  background-color: indianred;
 }
 .imgCock{
 
-border-radius: 70%;
+border-radius: 30%;
 border-bottom: 30px solid blanchedalmond;
 border-left: 15px solid transparent;
 border-right: 15px solid transparent;
@@ -53,7 +54,18 @@ border-right: 15px solid transparent;
   margin: 1.6em;
   width: 4em;
   height: 4em;
-  
+}
+#oneer{
+  background-color: orange;
+}
+#twoer{
+  background-color: indianred;
+}
+#dreier{
+  background-color: darkcyan;
+}
+#fourer{
+  background-color: greenyellow;
 }
 .netLine{
   height: 0.5em;
@@ -65,12 +77,13 @@ border-right: 15px solid transparent;
   outline: 0.2em solid white; 
 }
 .divWinner{
-  width: 100%;
-  height: 20em;
+  width: 95%;
+  height: 60vh;
   background-color: orange;
   border: 0.3em solid red;
   z-index: 100;
-  transform: translateY(-20em);
+  position: fixed;
+  top:2em;
 }
 .btnTry{
   height: 2.6em;

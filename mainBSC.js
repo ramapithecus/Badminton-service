@@ -1,6 +1,5 @@
 var body = document.body;
 body.classList.add('green');
-body.addEventListener('load',winnerSet);
 var gridContainer = document.createElement('div');
 body.appendChild(gridContainer);
 //head
@@ -28,12 +27,12 @@ btn1T.classList.add('butt');
 btn1T.innerText ='Team1';
 headContainer.appendChild(btn1T);
 btn1T.addEventListener('click',addScore1T);
-btn1T.addEventListener('click',winnerSet);
+btn1T.addEventListener('click',winnerOfSet);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.innerText = 'Team2';
 btn2T.addEventListener('click',addScore2T);
-btn2T.addEventListener('click',winnerSet);
+btn2T.addEventListener('click',winnerOfSet);
 headContainer.appendChild(btn2T);
 
 var btnStart = document.createElement('button');
@@ -42,22 +41,20 @@ btnStart.setAttribute('id','starterButt');
 btnStart.innerText = `let's start`;
 btnStart.addEventListener('click', cockCreate);
 headContainer.appendChild(btnStart);
-var btnTry = document.createElement('button');
-btnTry.classList.add('btnTry');
-btnTry.addEventListener('click',instantWin);
-btnTry.addEventListener('click',winnerSet);
-btnTry.innerText = 'instant Win';
-headContainer.appendChild(btnTry);
+
+var btnInstaWin = document.createElement('button');
+btnInstaWin.classList.add('btnInstaWin');
+//btnInstaWin.addEventListener('click',instantWin);
+btnInstaWin.addEventListener('click',winnerOfSet);
+btnInstaWin.innerText = 'instant Win';
+headContainer.appendChild(btnInstaWin);
+// functions
 function instantWin(){
   var pointsScore = document.getElementById('score1');
   var pointAdder = parseInt(pointsScore.innerHTML);
   pointAdder = parseInt(pointAdder + 20);
-  console.log(pointAdder);
   pointsScore.innerHTML= parseInt(pointAdder);
-   console.log(pointAdder);
-  console.log(pointsScore);
 }
-// functions
 function addScore1T(){
   var scoreSpan =document.getElementById('score1');
   var ScoreAdder = parseInt(scoreSpan.innerHTML);
@@ -87,7 +84,12 @@ function addScore2T(){
 function cockCreate(){
     var score1T = document.getElementById('score1'); 
     var score2T = document.getElementById('score2');
-   var starter = document.getElementById('starterButt');
+    var starter = document.getElementById('starterButt');
+    var pointAddbuttons = document.querySelectorAll('.butt');
+    console.log(pointAddbuttons);
+     pointAddbuttons[0].style.visibility = 'visible';
+     pointAddbuttons[1].style.visibility = 'visible';
+    
    var cockImg = document.createElement('div');
   cockImg.classList.add('imgCock');
   cockImg.setAttribute('id','cock');
@@ -101,8 +103,11 @@ function cockCreate(){
       score1T.innerHTML = parseInt(0);
      player1.appendChild(cockImg); 
     }
+   btn1T.addEventListener('click',addScore1T);
+   btn2T.addEventListener('click',addScore2T);
+   btnInstaWin.addEventListener('click',instantWin);
 }
-function winnerSet(){
+function winnerOfSet(){
   var score1T = document.getElementById('score1').innerHTML;
   var score2T = document.getElementById('score2').innerHTML;
   var winner, loser;
@@ -110,40 +115,60 @@ function winnerSet(){
 {
     winner = ' kokoti from Team 1';
     loser = ' team 2';
-             var divWinn = document.createElement('div');
-             body.appendChild(divWinn);
-             divWinn.innerText = `${winner} has won`;
-             divWinn.classList.add('divWinner');
+     gridContainer.appendChild(divWinn);
+     divWinn.innerText = `${winner} has won`;
  }
    if (parseInt(score2T) - parseInt(score1T) >= 2 && parseInt(score2T) >= 21 || parseInt(score2T) == 30 )
  { 
      winner = 'kokoti from Team 2';
       loser = 'team 1';
-               var divWinn = document.createElement('div');
-               body.appendChild(divWinn);
-               divWinn.innerText = `${winner} has won`;
-               divWinn.classList.add('divWinner');
+  gridContainer.appendChild(divWinn);
+ //divWinn.innerText = `${winner} has won`;
     }
   }
-
-
+function nextSet(){
+  var score1T = document.getElementById('score1').innerHTML;
+  var score2T = document.getElementById('score2').innerHTML;
+  var winner, loser;  
+  gridContainer.removeChild(divWinn);
+    score1T = parseInt(0);
+    score2T = parseInt(0);
+   
+    
+}
+// divWin container
+var divWinn = document.createElement('div');
+divWinn.classList.add('divWinner');
+var rstButt = document.createElement('button');
+rstButt.classList.add('butt');
+rstButt.innerText = 'restart match ?';
+rstButt.addEventListener('click',nextSet);
+/*rstButt.addEventListener('click',function(){
+    gridContainer.removeChild(divWinn);
+   var cockShuttle = document.getElementById('cock');
+    document.removeChild(cockShuttle);
+}
+);*/
+divWinn.appendChild(rstButt);
 //game container
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
 gridContainer.appendChild(gameContainer);
 var player1 = document.createElement('div');
-player1.setAttribute('name','player1');
+//player1.setAttribute('name','player1');
 player1.setAttribute('id','oneer')
 player1.classList.add('players');
 player1.innerText = 1;
 var player2 = document.createElement('div');
+player2.setAttribute('id','twoer');
 player2.innerText = 2;
 player2.classList.add('players');
 var player3 = document.createElement('div');
-player1.classList.add('players');
+player3.setAttribute('id','dreier');
 player3.innerText= 3;
 player3.classList.add('players');
 var player4 = document.createElement('div');
+player4.setAttribute('id','fourer');
 player4.innerText= 4;
 player4.classList.add('players');
 gameContainer.appendChild(player1);
@@ -155,4 +180,5 @@ gameContainer.appendChild(netLine);
 gameContainer.appendChild(pause1);
 gameContainer.appendChild(player3);
 gameContainer.appendChild(player4);
- 
+
+
