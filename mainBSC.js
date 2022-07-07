@@ -44,7 +44,7 @@ headContainer.appendChild(btnStart);
 
 var btnInstaWin = document.createElement('button');
 btnInstaWin.classList.add('btnInstaWin');
-//btnInstaWin.addEventListener('click',instantWin);
+btnInstaWin.addEventListener('click',instantWin);
 btnInstaWin.addEventListener('click',winnerOfSet);
 btnInstaWin.innerText = 'instant Win';
 headContainer.appendChild(btnInstaWin);
@@ -110,35 +110,38 @@ function cockCreate(){
 function winnerOfSet(){
   var score1T = document.getElementById('score1').innerHTML;
   var score2T = document.getElementById('score2').innerHTML;
+  var paraWinnerInfo = document.querySelector('#pinfowin');
+    
   var winner, loser;
  if (parseInt(score1T) - parseInt(score2T) >= 2 && parseInt(score1T) >= 21 || parseInt(score1T) == 30 )
 {
     winner = ' kokoti from Team 1';
     loser = ' team 2';
      gridContainer.appendChild(divWinn);
-     divWinn.innerText = `${winner} has won`;
+     paraWinnerInfo.innerHTML = `${winner} has won`;
  }
    if (parseInt(score2T) - parseInt(score1T) >= 2 && parseInt(score2T) >= 21 || parseInt(score2T) == 30 )
  { 
      winner = 'kokoti from Team 2';
       loser = 'team 1';
   gridContainer.appendChild(divWinn);
- //divWinn.innerText = `${winner} has won`;
+ paraWinnerInfo.innerText = `${winner} has won`;
     }
   }
 function nextSet(){
-  var score1T = document.getElementById('score1').innerHTML;
-  var score2T = document.getElementById('score2').innerHTML;
+  var score1T = document.getElementById('score1');
+  var score2T = document.getElementById('score2');
   var winner, loser;  
   gridContainer.removeChild(divWinn);
-    score1T = parseInt(0);
-    score2T = parseInt(0);
-   
-    
+    score1T.innerHTML = parseInt(0);
+    score2T.innerHTML = parseInt(0);
 }
 // divWin container
 var divWinn = document.createElement('div');
 divWinn.classList.add('divWinner');
+var paraWinnerInfo = document.createElement('p');
+paraWinnerInfo.setAttribute('id','pinfowin');
+divWinn.appendChild(paraWinnerInfo);
 var rstButt = document.createElement('button');
 rstButt.classList.add('butt');
 rstButt.innerText = 'restart match ?';
@@ -150,6 +153,7 @@ rstButt.addEventListener('click',nextSet);
 }
 );*/
 divWinn.appendChild(rstButt);
+
 //game container
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
