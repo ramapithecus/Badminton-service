@@ -1,9 +1,14 @@
-.green {
+.theme {
     font-size: 15pt;
     background-color: seagreen;
     display: grid;
 }
+p{
+    width: max-content;
+    margin: 0.5em;
+}
 .head{
+/*  display: inline;    */
   background-color: black;
   color: white;
   border: 0.15em inset whitesmoke;
@@ -11,8 +16,8 @@
 }
 .game{
   display: flex;
-  background-color: blue;
-  border: 0.12em solid ghostwhite;
+  background-color: saddlebrown;
+  border: 0.18em solid ghostwhite;
   justify-content: space-evenly;
   flex-wrap: wrap;
   justify-items: center;
@@ -21,7 +26,9 @@
 }
 .butt{
   background-color: grey;
-    visibility : hidden;
+}
+.pointbutt{
+    visibility: hidden;
 }
 .startButt{
   width: 6.6em;
