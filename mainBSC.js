@@ -6,23 +6,25 @@ body.appendChild(gridContainer);
 var headContainer = document.createElement('div');
 headContainer.classList.add('head');
 gridContainer.appendChild(headContainer);
-//heading
+//team1
 var para1T = document.createElement('p');
+para1T.setAttribute('id','team1');
 para1T.innerHTML = 'Team1 :';
 var span1Score = document.createElement('p');
 span1Score.setAttribute('id', 'score1');
 span1Score.innerHTML = parseInt(0);
-span1Score.addEventListener('change', negativeScoreAlert);
 headContainer.appendChild(para1T);
 headContainer.appendChild(span1Score); 
+//team2
 var para2T = document.createElement('p');
+para2T.setAttribute('id','team2');
 para2T.innerHTML = 'Team2 :';
-headContainer.appendChild(para2T);
 var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
 span2Score.innerHTML = parseInt(0);
+headContainer.appendChild(para2T);
 headContainer.appendChild(span2Score);
-//buttons
+//buttons point+
 var btn1T = document.createElement('button');
 btn1T.classList.add('butt');
 btn1T.classList.add('pointbutt');
@@ -30,13 +32,16 @@ btn1T.innerText = 'Team1';
 headContainer.appendChild(btn1T);
 btn1T.addEventListener('click', addScore1T);
 btn1T.addEventListener('click', winnerOfSet);
+btn1T.addEventListener('click',intvalPause);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.classList.add('pointbutt');
 btn2T.innerText = 'Team2';
 btn2T.addEventListener('click', addScore2T);
 btn2T.addEventListener('click', winnerOfSet);
+btn2T.addEventListener('click',intvalPause);
 headContainer.appendChild(btn2T);
+//bttons point-
 var btn1TRed = document.createElement('button');
 btn1TRed.classList.add('butt');
 btn1TRed.addEventListener('click', reduceScore1T);
@@ -49,6 +54,7 @@ btn2TRed.addEventListener('click', reduceScore2T);
 btn2TRed.addEventListener('click', negativeScoreAlert);
 headContainer.appendChild(btn2TRed);
 btn2TRed.innerText = 'point ↓ T2 ';
+//other buttons
 var btnStart = document.createElement('button');
 btnStart.classList.add('startButt');
 btnStart.setAttribute('id', 'starterButt');
@@ -138,9 +144,12 @@ function cockCreate(){
     var score1T = document.getElementById('score1'); 
     var score2T = document.getElementById('score2');
     var starter = document.getElementById('starterButt');
-    var pointAddbuttons = document.querySelectorAll('.butt');
-        pointAddbuttons[0].style.visibility = 'visible';
-     pointAddbuttons[1].style.visibility = 'visible';
+    const pointButtons = document.querySelectorAll('.butt');
+    pointButtons.forEach(function (pointButton){
+        pointButton.style.visibility = 'visible';
+    });
+//        pointButtons[0].style.visibility = 'visible';
+//        pointButtons[1].style.visibility = 'visible';
     
    var cockImg = document.createElement('div');
   cockImg.classList.add('imgCock');
@@ -186,24 +195,34 @@ function nextSet(){
   gridContainer.removeChild(divWinn);
     score1T.innerHTML = parseInt(0);
     score2T.innerHTML = parseInt(0);
+    btn1T.addEventListener('click',intvalPause);
+    btn2T.addEventListener('click',intvalPause);
 }
-// divWin container
-var divWinn = document.createElement('div');
-divWinn.classList.add('divWinner');
-var paraWinnerInfo = document.createElement('p');
-paraWinnerInfo.setAttribute('id','pinfowin');
-divWinn.appendChild(paraWinnerInfo);
-var rstButt = document.createElement('button');
-rstButt.classList.add('butt');
-rstButt.innerText = 'restart match ?';
-rstButt.addEventListener('click',nextSet);
-rstButt.addEventListener('click',function(){
-    gridContainer.removeChild(divWinn);
-   var cockShuttle = document.getElementById('cock');
-    document.removeChild(cockShuttle);
-}
-);
-divWinn.appendChild(rstButt);
+function intvalPause(){
+    var spanScoreT1 = document.querySelector('#score1');
+    var scoreT1 = spanScoreT1.innerHTML;
+    var team1 = document.getElementById('team1').innerHTML;
+    var spanScoreT2 = document.querySelector('#score2');
+    var scoreT2 = spanScoreT2.innerHTML;
+    var team2 = document.getElementById('team2').innerHTML;
+    var winner, loser;
+    if(parseInt(scoreT1) == 11 && parseInt(scoreT1) > parseInt(scoreT2)){
+        gameContainer.appendChild(intvalBreak);
+        winner = team1;
+        loser = team2;
+        paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
+         btn1T.removeEventListener('click',intvalPause);
+         btn2T.removeEventListener('click',intvalPause);
+    }
+   else if(parseInt(scoreT2) == 11 && parseInt(scoreT2) > parseInt(scoreT1)){
+        gameContainer.appendChild(intvalBreak);
+        winner = team2;
+        loser = team1;
+        paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
+        btn1T.removeEventListener('click',intvalPause);
+        btn2T.removeEventListener('click',intvalPause);
+    } 
+   }
 
 //game container
 var gameContainer = document.createElement('div');
@@ -235,4 +254,41 @@ gameContainer.appendChild(pause1);
 gameContainer.appendChild(player3);
 gameContainer.appendChild(player4);
 
-
+// divWin container
+var divWinn = document.createElement('div');
+divWinn.classList.add('divWinner');
+var paraWinnerInfo = document.createElement('p');
+paraWinnerInfo.setAttribute('id','pinfowin');
+divWinn.appendChild(paraWinnerInfo);
+var rstButt = document.createElement('button');
+rstButt.classList.add('butt');
+rstButt.classList.add('rstButt');
+rstButt.innerText = 'restart match ?';
+rstButt.addEventListener('click',nextSet);
+rstButt.addEventListener('click',function(){
+    gridContainer.removeChild(divWinn);
+   var cockShuttle = document.getElementById('cock');
+    document.removeChild(cockShuttle);
+}
+);
+divWinn.appendChild(rstButt);
+// intervalBreak container
+var intvalBreak = document.createElement('div');
+intvalBreak.classList.add('intval');
+var paraIntvalTimer= document.createElement('p');
+paraIntvalTimer.setAttribute('id','pIntvalTimer');
+paraIntvalTimer.innerHTML = parseInt(60);
+var paraIntvalInfo = document.createElement('p');
+paraIntvalInfo.setAttribute('id', 'pIntvalInfo');
+var paraIntvalSign = document.createElement('h3');
+paraIntvalSign.innerHTML = ' interval break';
+paraIntvalSign.classList.add('intvalHeader');
+var btnIntvalClose = document.createElement('button');
+btnIntvalClose.innerText = 'close interval pause';
+btnIntvalClose.addEventListener('click',function(){
+    gameContainer.removeChild(intvalBreak);
+})
+intvalBreak.appendChild(paraIntvalSign);
+intvalBreak.appendChild(paraIntvalInfo);
+intvalBreak.appendChild(paraIntvalTimer );
+intvalBreak.appendChild( btnIntvalClose);

@@ -26,9 +26,13 @@ p{
 }
 .butt{
   background-color: grey;
+  visibility: hidden;
 }
 .pointbutt{
-    visibility: hidden;
+/*    visibility: hidden;*/
+}
+.rstButt{
+    visibility: visible;
 }
 .startButt{
   width: 6.6em;
@@ -97,4 +101,21 @@ border-right: 15px solid transparent;
   width: 4.3em;
   border-radius: 25% 50%;
   color: purple;
+}
+.intval{
+    width: 90%;
+    height: 85vh;
+    position: fixed;
+    top: 2em;
+    background-color: beige;
+    border: 0.67em inset slategray;
+    font-size: 10px;
+    font-weight: 700;
+    color: maroon;
+    z-index: 100;
+    
+}
+.intvalHeader{
+    text-transform: uppercase;
+    text-align:  center;
 }
