@@ -148,9 +148,6 @@ function cockCreate(){
     pointButtons.forEach(function (pointButton){
         pointButton.style.visibility = 'visible';
     });
-//        pointButtons[0].style.visibility = 'visible';
-//        pointButtons[1].style.visibility = 'visible';
-    
    var cockImg = document.createElement('div');
   cockImg.classList.add('imgCock');
   cockImg.setAttribute('id','cock');
@@ -205,13 +202,15 @@ function intvalPause(){
     var spanScoreT2 = document.querySelector('#score2');
     var scoreT2 = spanScoreT2.innerHTML;
     var team2 = document.getElementById('team2').innerHTML;
+    paraIntvalTimer.innerHTML = parseInt(60);
     var winner, loser;
+    
     if(parseInt(scoreT1) == 11 && parseInt(scoreT1) > parseInt(scoreT2)){
         gameContainer.appendChild(intvalBreak);
         winner = team1;
         loser = team2;
          paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
-//         var  intPauseSetter = setInterval(closeIntvalBreak,1000);  
+         intvalTimer();  
          btn1T.removeEventListener('click',intvalPause);
          btn2T.removeEventListener('click',intvalPause);
     }
@@ -220,28 +219,21 @@ function intvalPause(){
         winner = team2;
         loser = team1;
         paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
-//        var  intPauseSetter =  setInterval(closeIntvalBreak,1000);  
+        intvalTimer();  
         btn1T.removeEventListener('click',intvalPause);
         btn2T.removeEventListener('click',intvalPause);
     }  
-//    if( parseInt(paraIntvalTimer.innerHTML) == 0){
-//        clearInterval(intPauseSetter);
-//    }
    }
-function closeIntvalBreak(){
-    var pIntvalTime = document.querySelector('#pIntvalTimer');
-    var intvalTimeleft = parseInt(pIntvalTime.innerHTML);
-//    intvalTimeLeft = parseInt(60);
-    intvalTimeleft = parseInt(intvalTimeleft.innerHTML)-1;
-//     setInterval(closeIntvalBreak,1000);   
-
-    if(parseInt(intvalTimeleft) == 0 ){
-        clearInterval(closeIntvalBreak);
-         gameContainer.removeChild(intvalBreak);    
-    }
-    }
-// setInterval(closeIntvalBreak,1000);   
-
+function intvalTimer(){
+ var  intPauseSetter = setTimeout(intvalTimer,1000); 
+  var pIntvalTime = document.querySelector('#pIntvalTimer');
+  var intvalTimeleft = pIntvalTime.innerHTML;
+    pIntvalTime.innerHTML = parseInt(intvalTimeleft) - 1; 
+if( parseInt(intvalTimeleft) <= 0){
+    clearTimeout(intPauseSetter);
+    gameContainer.removeChild(intvalBreak);}   
+//    clearTimeout(intPauseSetter); 
+}
 //game container
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
@@ -286,7 +278,8 @@ rstButt.addEventListener('click',nextSet);
 rstButt.addEventListener('click',function(){
     gridContainer.removeChild(divWinn);
    var cockShuttle = document.getElementById('cock');
-    document.removeChild(cockShuttle);
+//    document.removeChild(cockShuttle);
+//    player1.removeChild(cockShuttle);
 }
 );
 divWinn.appendChild(rstButt);
@@ -295,7 +288,7 @@ var intvalBreak = document.createElement('div');
 intvalBreak.classList.add('intval');
 var paraIntvalTimer= document.createElement('p');
 paraIntvalTimer.setAttribute('id','pIntvalTimer');
-paraIntvalTimer.innerHTML = parseInt(60);
+//paraIntvalTimer.innerHTML = parseInt(60);
 var paraIntvalInfo = document.createElement('p');
 paraIntvalInfo.setAttribute('id', 'pIntvalInfo');
 var paraIntvalSign = document.createElement('h3');
@@ -303,12 +296,13 @@ paraIntvalSign.innerHTML = ' interval break';
 paraIntvalSign.classList.add('intvalHeader');
 var btnIntvalClose = document.createElement('button');
 btnIntvalClose.innerText = 'close interval pause';
-//intvalBreak.addEventListener('load', closeIntvalBreak);
-//btnIntvalClose.addEventListener('load', closeIntvalBreak);
-btnIntvalClose.addEventListener('click', function(){
-     gameContainer.removeChild(intvalBreak); 
+//btnIntvalClose.addEventListener('click', function(){
+//     gameContainer.removeChild(intvalBreak); 
+// });
+ btnIntvalClose.addEventListener('click', function(){
+paraIntvalTimer.innerHTML = parseInt(3);   
  });
-      
+ btnIntvalClose.addEventListener('click',intvalTimer);     
 intvalBreak.appendChild(paraIntvalSign);
 intvalBreak.appendChild(paraIntvalInfo);
 intvalBreak.appendChild(paraIntvalTimer);
