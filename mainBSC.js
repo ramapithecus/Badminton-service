@@ -229,10 +229,11 @@ function intvalTimer(){
   var pIntvalTime = document.querySelector('#pIntvalTimer');
   var intvalTimeleft = pIntvalTime.innerHTML;
     pIntvalTime.innerHTML = parseInt(intvalTimeleft) - 1; 
-if( parseInt(intvalTimeleft) <= 0){
-    clearTimeout(intPauseSetter);
-    gameContainer.removeChild(intvalBreak);}   
-//    clearTimeout(intPauseSetter); 
+if( parseInt(pIntvalTime.innerHTML) <= 0){
+        clearTimeout(intPauseSetter);
+    gameContainer.removeChild(intvalBreak);
+}
+//   clearTimeout(intPauseSetter); 
 }
 //game container
 var gameContainer = document.createElement('div');
@@ -302,7 +303,6 @@ btnIntvalClose.innerText = 'close interval pause';
  btnIntvalClose.addEventListener('click', function(){
 paraIntvalTimer.innerHTML = parseInt(3);   
  });
- btnIntvalClose.addEventListener('click',intvalTimer);     
 intvalBreak.appendChild(paraIntvalSign);
 intvalBreak.appendChild(paraIntvalInfo);
 intvalBreak.appendChild(paraIntvalTimer);
