@@ -10,20 +10,20 @@ gridContainer.appendChild(headContainer);
 var para1T = document.createElement('p');
 para1T.setAttribute('id','team1');
 para1T.innerHTML = 'Team1 :';
-var span1Score = document.createElement('p');
+var span1Score = document.createElement('span');
 span1Score.setAttribute('id', 'score1');
 span1Score.innerHTML = parseInt(0);
 headContainer.appendChild(para1T);
-headContainer.appendChild(span1Score); 
+para1T.appendChild(span1Score); 
 //team2
 var para2T = document.createElement('p');
-para2T.setAttribute('id','team2');
+para2T.setAttribute('id', 'team2');
 para2T.innerHTML = 'Team2 :';
 var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
 span2Score.innerHTML = parseInt(0);
 headContainer.appendChild(para2T);
-headContainer.appendChild(span2Score);
+para2T.appendChild(span2Score);
 //buttons point+
 var btn1T = document.createElement('button');
 btn1T.classList.add('butt');
@@ -41,7 +41,7 @@ btn2T.addEventListener('click', addScore2T);
 btn2T.addEventListener('click', winnerOfSet);
 btn2T.addEventListener('click',intvalPause);
 headContainer.appendChild(btn2T);
-//bttons point-
+//buttons point-
 var btn1TRed = document.createElement('button');
 btn1TRed.classList.add('butt');
 btn1TRed.addEventListener('click', reduceScore1T);
@@ -61,7 +61,6 @@ btnStart.setAttribute('id', 'starterButt');
 btnStart.innerText = 'let us start' ;
 btnStart.addEventListener('click', cockCreate);
 headContainer.appendChild(btnStart);
-
 var btnInstaWin = document.createElement('button');
 btnInstaWin.classList.add('btnInstaWin');
 btnInstaWin.addEventListener('click',instantWin);
@@ -69,78 +68,80 @@ btnInstaWin.addEventListener('click',winnerOfSet);
 btnInstaWin.innerText = 'instant Win';
 headContainer.appendChild(btnInstaWin);
 // functions
-function instantWin(){
+function instantWin() {
   var pointsScore = document.getElementById('score1');
   var pointAdder = parseInt(pointsScore.innerHTML);
-  pointAdder = parseInt(pointAdder + 20);
-  pointsScore.innerHTML= parseInt(pointAdder);
+    pointAdder = parseInt(pointAdder + 20);
+    pointsScore.innerHTML = parseInt(pointAdder);
 }
-function addScore1T(){
+function addScore1T() {
   var scoreSpan =document.getElementById('score1');
   var ScoreAdder = parseInt(scoreSpan.innerHTML);
   var cockShuttle = document.getElementById('cock');
-    ScoreAdder = parseInt(ScoreAdder+1);
+    ScoreAdder = parseInt(ScoreAdder + 1);
   scoreSpan.innerHTML = parseInt(ScoreAdder);
    if (parseInt(ScoreAdder) % 2 == 0) {
-      player1.appendChild(cockShuttle);
+      topLeftPosition.appendChild(cockShuttle);
     }
     else {
-      player2.appendChild(cockShuttle);
+      topRightPosition.appendChild(cockShuttle);
     }
 }
-function addScore2T(){
-  var cockShuttle = document.getElementById('cock');
-  var scoreSpan = document.getElementById('score2');
-  var ScoreAdder = parseInt(scoreSpan.innerHTML);
+function addScore2T() {
+   var cockShuttle = document.getElementById('cock');
+   var scoreSpan = document.getElementById('score2');
+   var ScoreAdder = parseInt(scoreSpan.innerHTML);
   ScoreAdder = parseInt(ScoreAdder +  1);
   scoreSpan.innerHTML = parseInt(ScoreAdder);
-  if(parseInt(ScoreAdder)%2==0){
-    player4.appendChild(cockShuttle);
+  if(parseInt(ScoreAdder) % 2 == 0){
+    bottomRightPosition.appendChild(cockShuttle);
   }
   else{
-    player3.appendChild(cockShuttle);
+    bottomLeftPosition.appendChild(cockShuttle);
   }
 }
-function reduceScore1T(){
+function reduceScore1T() {
     var scoreSpan = document.querySelector('#score1');
     var cockShuttle = document.querySelector('#cock');
     var scoreReducer = parseInt(scoreSpan.innerHTML);
-    scoreReducer = parseInt(scoreReducer)-1;
+    scoreReducer = parseInt(scoreReducer) -  1;
     scoreSpan.innerHTML = parseInt(scoreReducer);
      if (parseInt(scoreReducer) % 2 == 0) {
-      player1.appendChild(cockShuttle);
+      topLeftPosition.appendChild(cockShuttle);
     }
     else {
-      player2.appendChild(cockShuttle);
+      topRightPosition.appendChild(cockShuttle);
     }
    
 }
-function reduceScore2T(){
+function reduceScore2T() {
     var scoreSpan = document.querySelector('#score2');
     var cockShuttle = document.querySelector('#cock');
     var scoreReducer = parseInt(scoreSpan.innerHTML);
     scoreReducer = parseInt(scoreReducer)-1;
     scoreSpan.innerHTML = parseInt(scoreReducer);
      if (parseInt(scoreReducer) % 2 == 0) {
-      player4.appendChild(cockShuttle);
+      bottomRightPosition.appendChild(cockShuttle);
     }
     else {
-      player3.appendChild(cockShuttle);
+      bottomLeftPosition.appendChild(cockShuttle);
     }
     } 
-function negativeScoreAlert(){
+function negativeScoreAlert() {
   var spanScoreT1 = document.querySelector('#score1');
   var spanScoreT2 = document.querySelector('#score2');
     if( parseInt(spanScoreT1.innerHTML)< 0 ){ 
         alert('Score cannot be under 0 ! ');
-        spanScoreT1.innerHTML = 0;
+        spanScoreT1.innerHTML = -1;
+        addScore1T();
     }
     else if (parseInt(spanScoreT2.innerHTML)< 0){
-     alert(`Score cannot be under 0 ! `);
-        spanScoreT2.innerHTML = 0;
+     alert('Score cannot be under 0 ! ');
+        spanScoreT2.innerHTML = -1;
+        addScore2T();
     }
 }
-function cockCreate(){
+function cockCreate() {
     var score1T = document.getElementById('score1'); 
     var score2T = document.getElementById('score2');
     var starter = document.getElementById('starterButt');
@@ -153,19 +154,19 @@ function cockCreate(){
   cockImg.setAttribute('id','cock');
     if( score1T == parseInt(0) && score2T == parseInt(0)){
   starter.style.visibility = 'hidden';
-  player1.appendChild(cockImg);
+  topLeftPosition.appendChild(cockImg);
     }
     else{ 
       starter.style.visibility = 'hidden';
       score2T.innerHTML= parseInt(0);
       score1T.innerHTML = parseInt(0);
-     player1.appendChild(cockImg); 
+     topLeftPosition.appendChild(cockImg); 
     }
    btn1T.addEventListener('click',addScore1T);
    btn2T.addEventListener('click',addScore2T);
    btnInstaWin.addEventListener('click',instantWin);
 }
-function winnerOfSet(){
+function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
   var score2T = document.getElementById('score2').innerHTML; 
   var winner, loser;
@@ -185,7 +186,7 @@ function winnerOfSet(){
     }
     divWinn.appendChild(paraWinnerInfo);
   }
-function nextSet(){
+function nextSet() {
   var score1T = document.getElementById('score1');
   var score2T = document.getElementById('score2');
   var winner, loser;  
@@ -195,7 +196,7 @@ function nextSet(){
     btn1T.addEventListener('click',intvalPause);
     btn2T.addEventListener('click',intvalPause);
 }
-function intvalPause(){
+function intvalPause() {
     var spanScoreT1 = document.querySelector('#score1');
     var scoreT1 = spanScoreT1.innerHTML;
     var team1 = document.getElementById('team1').innerHTML;
@@ -224,7 +225,7 @@ function intvalPause(){
         btn2T.removeEventListener('click',intvalPause);
     }  
    }
-function intvalTimer(){
+function intvalTimer() {
  var  intPauseSetter = setTimeout(intvalTimer,1000); 
   var pIntvalTime = document.querySelector('#pIntvalTimer');
   var intvalTimeleft = pIntvalTime.innerHTML;
@@ -239,31 +240,31 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
 gridContainer.appendChild(gameContainer);
-var player1 = document.createElement('div');
-player1.setAttribute('id','oneer')
-player1.classList.add('players');
-player1.innerText = 1;
-var player2 = document.createElement('div');
-player2.setAttribute('id','twoer');
-player2.innerText = 2;
-player2.classList.add('players');
-var player3 = document.createElement('div');
-player3.setAttribute('id','dreier');
-player3.innerText= 3;
-player3.classList.add('players');
-var player4 = document.createElement('div');
-player4.setAttribute('id','fourer');
-player4.innerText= 4;
-player4.classList.add('players');
-gameContainer.appendChild(player1);
-gameContainer.appendChild(player2);
+var topLeftPosition = document.createElement('div');
+topLeftPosition.setAttribute('id','oneer')
+topLeftPosition.classList.add('players');
+topLeftPosition.innerText = 1;
+var topRightPosition = document.createElement('div');
+topRightPosition.setAttribute('id','twoer');
+topRightPosition.innerText = 2;
+topRightPosition.classList.add('players');
+var bottomLeftPosition = document.createElement('div');
+bottomLeftPosition.setAttribute('id','dreier');
+bottomLeftPosition.innerText= 3;
+bottomLeftPosition.classList.add('players');
+var bottomRightPosition = document.createElement('div');
+bottomRightPosition.setAttribute('id','fourer');
+bottomRightPosition.innerText= 4;
+bottomRightPosition.classList.add('players');
+gameContainer.appendChild(topLeftPosition);
+gameContainer.appendChild(topRightPosition);
 var pause1 = document.createElement('br');
 var netLine = document.createElement('div');
 netLine.classList.add('netLine');
 gameContainer.appendChild(netLine);
 gameContainer.appendChild(pause1);
-gameContainer.appendChild(player3);
-gameContainer.appendChild(player4);
+gameContainer.appendChild(bottomLeftPosition);
+gameContainer.appendChild(bottomRightPosition);
 
 // divWin container
 var divWinn = document.createElement('div');
@@ -280,7 +281,7 @@ rstButt.addEventListener('click',function(){
     gridContainer.removeChild(divWinn);
    var cockShuttle = document.getElementById('cock');
 //    document.removeChild(cockShuttle);
-//    player1.removeChild(cockShuttle);
+//    topLeftPosition.removeChild(cockShuttle);
 }
 );
 divWinn.appendChild(rstButt);
@@ -289,7 +290,6 @@ var intvalBreak = document.createElement('div');
 intvalBreak.classList.add('intval');
 var paraIntvalTimer= document.createElement('p');
 paraIntvalTimer.setAttribute('id','pIntvalTimer');
-//paraIntvalTimer.innerHTML = parseInt(60);
 var paraIntvalInfo = document.createElement('p');
 paraIntvalInfo.setAttribute('id', 'pIntvalInfo');
 var paraIntvalSign = document.createElement('h3');
@@ -300,7 +300,7 @@ btnIntvalClose.innerText = 'close interval pause';
 //btnIntvalClose.addEventListener('click', function(){
 //     gameContainer.removeChild(intvalBreak); 
 // });
- btnIntvalClose.addEventListener('click', function(){
+ btnIntvalClose.addEventListener('click', function() {
 paraIntvalTimer.innerHTML = parseInt(3);   
  });
 intvalBreak.appendChild(paraIntvalSign);

@@ -7,8 +7,11 @@ p{
     width: max-content;
     margin: 0.5em;
 }
+span{
+    padding: 0.25em;
+}
 .head{
-/*  display: inline;    */
+/*  display: flex;    */
   background-color: black;
   color: white;
   border: 0.15em inset whitesmoke;
@@ -27,22 +30,21 @@ p{
 .butt{
   background-color: grey;
   visibility: hidden;
-}
-.pointbutt{
-/*    visibility: hidden;*/
+  padding: 0.35em;
+  margin: 0.16em;    
 }
 .rstButt{
     visibility: visible;
 }
 .startButt{
   width: 6.6em;
-  height: 2em;
+  height: 2.2em;
   color: black;
   background-color: wheat;
   border: 0.2em ridge olive;
   border-radius: 35%;
-  transform: translate(110px,-90px);
-  text-transform: capitalize;
+/*  transform: translate(110px,-90px);*/
+/*  text-transform: capitalize;*/
 }
 #starterButt{
   background-color: indianred;
