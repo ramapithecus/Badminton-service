@@ -8,10 +8,11 @@ headContainer.classList.add('head');
 gridContainer.appendChild(headContainer);
 //team1
 var para1T = document.createElement('p');
-para1T.setAttribute('id','team1');
+para1T.setAttribute('id', 'team1');
 para1T.innerHTML = 'Team1 :';
 var span1Score = document.createElement('span');
 span1Score.setAttribute('id', 'score1');
+span1Score.classList.add('scoreSpans');
 span1Score.innerHTML = parseInt(0);
 headContainer.appendChild(para1T);
 para1T.appendChild(span1Score); 
@@ -22,6 +23,7 @@ para2T.innerHTML = 'Team2 :';
 var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
 span2Score.innerHTML = parseInt(0);
+span2Score.classList.add('scoreSpans');
 headContainer.appendChild(para2T);
 para2T.appendChild(span2Score);
 //buttons point+
@@ -32,14 +34,14 @@ btn1T.innerText = 'Team1';
 headContainer.appendChild(btn1T);
 btn1T.addEventListener('click', addScore1T);
 btn1T.addEventListener('click', winnerOfSet);
-btn1T.addEventListener('click',intvalPause);
+btn1T.addEventListener('click', intvalPause);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.classList.add('pointbutt');
 btn2T.innerText = 'Team2';
 btn2T.addEventListener('click', addScore2T);
 btn2T.addEventListener('click', winnerOfSet);
-btn2T.addEventListener('click',intvalPause);
+btn2T.addEventListener('click', intvalPause);
 headContainer.appendChild(btn2T);
 //buttons point-
 var btn1TRed = document.createElement('button');
@@ -58,14 +60,14 @@ btn2TRed.innerText = 'point ↓ T2 ';
 var btnStart = document.createElement('button');
 btnStart.classList.add('startButt');
 btnStart.setAttribute('id', 'starterButt');
-btnStart.innerText = 'let us start' ;
+btnStart.innerText =  ` let's play! `;
 btnStart.addEventListener('click', cockCreate);
 headContainer.appendChild(btnStart);
 var btnInstaWin = document.createElement('button');
-btnInstaWin.classList.add('btnInstaWin');
+btnInstaWin.classList.add('btnTry');
 btnInstaWin.addEventListener('click',instantWin);
 btnInstaWin.addEventListener('click',winnerOfSet);
-btnInstaWin.innerText = 'instant Win';
+btnInstaWin.innerText = 'instant win';
 headContainer.appendChild(btnInstaWin);
 // functions
 function instantWin() {
@@ -76,24 +78,30 @@ function instantWin() {
 }
 function addScore1T() {
   var scoreSpan =document.getElementById('score1');
-  var ScoreAdder = parseInt(scoreSpan.innerHTML);
+  var scoreAdder = parseInt(scoreSpan.innerHTML);
   var cockShuttle = document.getElementById('cock');
-    ScoreAdder = parseInt(ScoreAdder + 1);
-  scoreSpan.innerHTML = parseInt(ScoreAdder);
-   if (parseInt(ScoreAdder) % 2 == 0) {
+    scoreAdder ++;
+  scoreSpan.innerHTML = parseInt(scoreAdder);
+   if (parseInt(scoreAdder) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
+      topLeftPosition.classList.toggle('twoer')
+      topRightPosition.classList.toggle('oneer')
     }
     else {
       topRightPosition.appendChild(cockShuttle);
+      topLeftPosition.classList.toggle('oneer');
+      topRightPosition.classList.toggle('twoer');
     }
+//    topLeftPosition.classList.toggle('oneer')
+//    topRightPosition.classList.toggle('oneer')
 }
 function addScore2T() {
    var cockShuttle = document.getElementById('cock');
    var scoreSpan = document.getElementById('score2');
-   var ScoreAdder = parseInt(scoreSpan.innerHTML);
-  ScoreAdder = parseInt(ScoreAdder +  1);
-  scoreSpan.innerHTML = parseInt(ScoreAdder);
-  if(parseInt(ScoreAdder) % 2 == 0){
+   var scoreAdder = parseInt(scoreSpan.innerHTML);
+    scoreAdder++;
+  scoreSpan.innerHTML = parseInt(scoreAdder);
+  if(parseInt(scoreAdder) % 2 == 0){
     bottomRightPosition.appendChild(cockShuttle);
   }
   else{
@@ -104,7 +112,7 @@ function reduceScore1T() {
     var scoreSpan = document.querySelector('#score1');
     var cockShuttle = document.querySelector('#cock');
     var scoreReducer = parseInt(scoreSpan.innerHTML);
-    scoreReducer = parseInt(scoreReducer) -  1;
+    scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
      if (parseInt(scoreReducer) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
@@ -118,7 +126,7 @@ function reduceScore2T() {
     var scoreSpan = document.querySelector('#score2');
     var cockShuttle = document.querySelector('#cock');
     var scoreReducer = parseInt(scoreSpan.innerHTML);
-    scoreReducer = parseInt(scoreReducer)-1;
+    scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
      if (parseInt(scoreReducer) % 2 == 0) {
       bottomRightPosition.appendChild(cockShuttle);
@@ -191,6 +199,14 @@ function nextSet() {
   var score2T = document.getElementById('score2');
   var winner, loser;  
   gridContainer.removeChild(divWinn);
+if (parseInt(score1T.innerHTML) > parseInt(score2T.innerHTML) ){
+score1T.innerHTML = parseInt(-1);
+    addScore1T();
+}
+else{
+    score2T.innerHTML = parseInt(-1);
+    addScore2T();    
+}    
     score1T.innerHTML = parseInt(0);
     score2T.innerHTML = parseInt(0);
     btn1T.addEventListener('click',intvalPause);
@@ -199,25 +215,25 @@ function nextSet() {
 function intvalPause() {
     var spanScoreT1 = document.querySelector('#score1');
     var scoreT1 = spanScoreT1.innerHTML;
-    var team1 = document.getElementById('team1').innerHTML;
+    var team1 = document.getElementById('team1').innerText;
     var spanScoreT2 = document.querySelector('#score2');
     var scoreT2 = spanScoreT2.innerHTML;
     var team2 = document.getElementById('team2').innerHTML;
     paraIntvalTimer.innerHTML = parseInt(60);
     var winner, loser;
-    
+     
     if(parseInt(scoreT1) == 11 && parseInt(scoreT1) > parseInt(scoreT2)){
         gameContainer.appendChild(intvalBreak);
-        winner = team1;
+        winner = 'team1';
         loser = team2;
-         paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
+        paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
          intvalTimer();  
          btn1T.removeEventListener('click',intvalPause);
          btn2T.removeEventListener('click',intvalPause);
     }
    else if(parseInt(scoreT2) == 11 && parseInt(scoreT2) > parseInt(scoreT1)){
         gameContainer.appendChild(intvalBreak);
-        winner = team2;
+        winner = 'team2';
         loser = team1;
         paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
         intvalTimer();  
@@ -234,38 +250,35 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
         clearTimeout(intPauseSetter);
     gameContainer.removeChild(intvalBreak);
 }
-//   clearTimeout(intPauseSetter); 
+
 }
 //game container
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
 gridContainer.appendChild(gameContainer);
 var topLeftPosition = document.createElement('div');
-topLeftPosition.setAttribute('id','oneer')
+topLeftPosition.setAttribute('class','oneer')
 topLeftPosition.classList.add('players');
 topLeftPosition.innerText = 1;
 var topRightPosition = document.createElement('div');
-topRightPosition.setAttribute('id','twoer');
+topRightPosition.setAttribute('class','twoer');
 topRightPosition.innerText = 2;
 topRightPosition.classList.add('players');
 var bottomLeftPosition = document.createElement('div');
-bottomLeftPosition.setAttribute('id','dreier');
+bottomLeftPosition.setAttribute('class','dreier');
 bottomLeftPosition.innerText= 3;
 bottomLeftPosition.classList.add('players');
 var bottomRightPosition = document.createElement('div');
-bottomRightPosition.setAttribute('id','fourer');
+bottomRightPosition.setAttribute('class','fourer');
 bottomRightPosition.innerText= 4;
 bottomRightPosition.classList.add('players');
 gameContainer.appendChild(topLeftPosition);
 gameContainer.appendChild(topRightPosition);
-var pause1 = document.createElement('br');
 var netLine = document.createElement('div');
 netLine.classList.add('netLine');
 gameContainer.appendChild(netLine);
-gameContainer.appendChild(pause1);
 gameContainer.appendChild(bottomLeftPosition);
 gameContainer.appendChild(bottomRightPosition);
-
 // divWin container
 var divWinn = document.createElement('div');
 divWinn.classList.add('divWinner');
@@ -280,8 +293,6 @@ rstButt.addEventListener('click',nextSet);
 rstButt.addEventListener('click',function(){
     gridContainer.removeChild(divWinn);
    var cockShuttle = document.getElementById('cock');
-//    document.removeChild(cockShuttle);
-//    topLeftPosition.removeChild(cockShuttle);
 }
 );
 divWinn.appendChild(rstButt);
@@ -297,12 +308,8 @@ paraIntvalSign.innerHTML = ' interval break';
 paraIntvalSign.classList.add('intvalHeader');
 var btnIntvalClose = document.createElement('button');
 btnIntvalClose.innerText = 'close interval pause';
-//btnIntvalClose.addEventListener('click', function(){
-//     gameContainer.removeChild(intvalBreak); 
-// });
  btnIntvalClose.addEventListener('click', function() {
-paraIntvalTimer.innerHTML = parseInt(3);   
- });
+paraIntvalTimer.innerHTML = parseInt(3);});
 intvalBreak.appendChild(paraIntvalSign);
 intvalBreak.appendChild(paraIntvalInfo);
 intvalBreak.appendChild(paraIntvalTimer);
