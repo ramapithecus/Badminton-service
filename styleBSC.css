@@ -44,7 +44,7 @@ span{
   font-weight:700;    
   margin-right: 1vw;    
   background-color: mediumpurple;
-  border: 0.2em ridge olive;
+  border: 0.45em ridge olive;
   border-radius: 35%;
   text-transform:uppercase;
 }
@@ -63,7 +63,7 @@ span{
   border: .11em  solid black;
   border-radius: 50% ;
   padding-top: 0.2vh;    
-  margin: 1.2em;
+  margin: 0.8em;
   width: 4em;
   height: 4em;
 }
@@ -71,7 +71,7 @@ span{
   background-color: orange;
 }
 .twoer{
-  background-color: indianred;
+  background-color: red;
 }
 .dreier{
   background-color: darkcyan;

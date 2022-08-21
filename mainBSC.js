@@ -8,17 +8,17 @@ headContainer.classList.add('head');
 gridContainer.appendChild(headContainer);
 //team1
 var para1T = document.createElement('p');
-para1T.setAttribute('id', 'team1');
+para1T.setAttribute('id', 'paraTeam-1');
 para1T.innerHTML = 'Team1 :';
 var span1Score = document.createElement('span');
 span1Score.setAttribute('id', 'score1');
 span1Score.classList.add('scoreSpans');
 span1Score.innerHTML = parseInt(0);
 headContainer.appendChild(para1T);
-para1T.appendChild(span1Score); 
+para1T.appendChild(span1Score);
 //team2
 var para2T = document.createElement('p');
-para2T.setAttribute('id', 'team2');
+para2T.setAttribute('id', 'paraTeam-2');
 para2T.innerHTML = 'Team2 :';
 var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
@@ -34,14 +34,15 @@ btn1T.innerText = 'Team1';
 headContainer.appendChild(btn1T);
 btn1T.addEventListener('click', addScore1T);
 btn1T.addEventListener('click', winnerOfSet);
-btn1T.addEventListener('click', intvalPause);
+//btn1T.addEventListener('click', intvalPause);
+//btn1T.addEventListener('click', switchingSides);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.classList.add('pointbutt');
 btn2T.innerText = 'Team2';
 btn2T.addEventListener('click', addScore2T);
 btn2T.addEventListener('click', winnerOfSet);
-btn2T.addEventListener('click', intvalPause);
+//btn2T.addEventListener('click', intvalPause);
 headContainer.appendChild(btn2T);
 //buttons point-
 var btn1TRed = document.createElement('button');
@@ -84,20 +85,22 @@ function addScore1T() {
   scoreSpan.innerHTML = parseInt(scoreAdder);
    if (parseInt(scoreAdder) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
-      topLeftPosition.classList.toggle('twoer')
-      topRightPosition.classList.toggle('oneer')
-    }
+//       topLeftPosition.classList.replace('oneer','twoer');
+//       topRightPosition.classList.replace('twoer','oneer');
+      }
     else {
       topRightPosition.appendChild(cockShuttle);
-      topLeftPosition.classList.toggle('oneer');
-      topRightPosition.classList.toggle('twoer');
-    }
-//    topLeftPosition.classList.toggle('oneer')
-//    topRightPosition.classList.toggle('oneer')
+//      topRightPosition.classList.replace('oneer','twoer');
+//      topLeftPosition.classList.replace('twoer','oneer');
+        }
+    switchingSides();
+//    console.log(topLeftPosition);
+//    console.log(topRightPosition);
 }
+
 function addScore2T() {
    var cockShuttle = document.getElementById('cock');
-   var scoreSpan = document.getElementById('score2');
+var scoreSpan = document.getElementById('score2');
    var scoreAdder = parseInt(scoreSpan.innerHTML);
     scoreAdder++;
   scoreSpan.innerHTML = parseInt(scoreAdder);
@@ -107,6 +110,17 @@ function addScore2T() {
   else{
     bottomLeftPosition.appendChild(cockShuttle);
   }
+}
+function switchingSides(){
+  var scoreSpan = document.querySelector('#score1');
+  var scoreAdder = parseInt(scoreSpan.innerHTML); 
+     topLeftPosition.classList.toggle('twoer');
+     topRightPosition.classList.add('oneer');
+     topRightPosition.classList.toggle('twoer');
+    
+   console.log(topLeftPosition);
+   console.log(topRightPosition);  
+    
 }
 function reduceScore1T() {
     var scoreSpan = document.querySelector('#score1');
@@ -120,7 +134,7 @@ function reduceScore1T() {
     else {
       topRightPosition.appendChild(cockShuttle);
     }
-   
+   switchingSides();
 }
 function reduceScore2T() {
     var scoreSpan = document.querySelector('#score2');
@@ -170,9 +184,6 @@ function cockCreate() {
       score1T.innerHTML = parseInt(0);
      topLeftPosition.appendChild(cockImg); 
     }
-   btn1T.addEventListener('click',addScore1T);
-   btn2T.addEventListener('click',addScore2T);
-   btnInstaWin.addEventListener('click',instantWin);
 }
 function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
@@ -215,10 +226,10 @@ else{
 function intvalPause() {
     var spanScoreT1 = document.querySelector('#score1');
     var scoreT1 = spanScoreT1.innerHTML;
-    var team1 = document.getElementById('team1').innerText;
+    var team1 = document.getElementById('paraTeam-1').innerText;
     var spanScoreT2 = document.querySelector('#score2');
     var scoreT2 = spanScoreT2.innerHTML;
-    var team2 = document.getElementById('team2').innerHTML;
+    var team2 = document.getElementById('paraTeam-2').innerHTML;
     paraIntvalTimer.innerHTML = parseInt(60);
     var winner, loser;
      
@@ -309,7 +320,7 @@ paraIntvalSign.classList.add('intvalHeader');
 var btnIntvalClose = document.createElement('button');
 btnIntvalClose.innerText = 'close interval pause';
  btnIntvalClose.addEventListener('click', function() {
-paraIntvalTimer.innerHTML = parseInt(3);});
+paraIntvalTimer.innerHTML = parseInt(1);});
 intvalBreak.appendChild(paraIntvalSign);
 intvalBreak.appendChild(paraIntvalInfo);
 intvalBreak.appendChild(paraIntvalTimer);
