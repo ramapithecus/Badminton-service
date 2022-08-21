@@ -35,7 +35,6 @@ headContainer.appendChild(btn1T);
 btn1T.addEventListener('click', addScore1T);
 btn1T.addEventListener('click', winnerOfSet);
 //btn1T.addEventListener('click', intvalPause);
-//btn1T.addEventListener('click', switchingSides);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.classList.add('pointbutt');
@@ -93,7 +92,7 @@ function addScore1T() {
 //      topRightPosition.classList.replace('oneer','twoer');
 //      topLeftPosition.classList.replace('twoer','oneer');
         }
-    switchingSides();
+    switchingSides1T();
 //    console.log(topLeftPosition);
 //    console.log(topRightPosition);
 }
@@ -110,17 +109,24 @@ var scoreSpan = document.getElementById('score2');
   else{
     bottomLeftPosition.appendChild(cockShuttle);
   }
+  switchingSides2T();  
 }
-function switchingSides(){
+function switchingSides1T(){
   var scoreSpan = document.querySelector('#score1');
   var scoreAdder = parseInt(scoreSpan.innerHTML); 
      topLeftPosition.classList.toggle('twoer');
      topRightPosition.classList.add('oneer');
      topRightPosition.classList.toggle('twoer');
-    
-   console.log(topLeftPosition);
-   console.log(topRightPosition);  
-    
+}
+function switchingSides2T(){
+ var scoreSpan = document.querySelector('#score2');
+  var scoreAdder = parseInt(scoreSpan.innerHTML); 
+     bottomRightPosition.classList.toggle('fourer');
+     bottomRightPosition.classList.add('dreier');
+     bottomLeftPosition.classList.add('dreier');
+     bottomLeftPosition.classList.toggle('fourer');  
+    console.log(bottomRightPosition);
+    console.log(bottomLeftPosition);
 }
 function reduceScore1T() {
     var scoreSpan = document.querySelector('#score1');
@@ -134,7 +140,7 @@ function reduceScore1T() {
     else {
       topRightPosition.appendChild(cockShuttle);
     }
-   switchingSides();
+   switchingSides1T();
 }
 function reduceScore2T() {
     var scoreSpan = document.querySelector('#score2');
@@ -148,6 +154,7 @@ function reduceScore2T() {
     else {
       bottomLeftPosition.appendChild(cockShuttle);
     }
+    switchingSides2T();
     } 
 function negativeScoreAlert() {
   var spanScoreT1 = document.querySelector('#score1');
