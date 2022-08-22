@@ -60,22 +60,25 @@ btn2TRed.innerText = 'point ↓ T2 ';
 var btnStart = document.createElement('button');
 btnStart.classList.add('startButt');
 btnStart.setAttribute('id', 'starterButt');
-btnStart.innerText =  ` let's play! `;
+//btnStart.innerText =  ` let's play! `;
 btnStart.addEventListener('click', cockCreate);
 headContainer.appendChild(btnStart);
 var btnInstaWin = document.createElement('button');
 btnInstaWin.classList.add('btnTry');
-btnInstaWin.addEventListener('click',instantWin);
-btnInstaWin.addEventListener('click',winnerOfSet);
+btnInstaWin.addEventListener('click', instantWin);
+btnInstaWin.addEventListener('click', winnerOfSet);
 btnInstaWin.innerText = 'instant win';
 headContainer.appendChild(btnInstaWin);
 // functions
 function instantWin() {
-  var pointsScore = document.getElementById('score1');
-  var pointAdder = parseInt(pointsScore.innerHTML);
+    var pointsScore = document.getElementById('score1');
+    var pointAdder = parseInt(pointsScore.innerHTML);
     pointAdder = parseInt(pointAdder + 20);
     pointsScore.innerHTML = parseInt(pointAdder);
 }
+//adding and reducing score functions
+var serviceRide1T = 1;
+var serviceRide2T = 1;  
 function addScore1T() {
   var scoreSpan =document.getElementById('score1');
   var scoreAdder = parseInt(scoreSpan.innerHTML);
@@ -84,19 +87,17 @@ function addScore1T() {
   scoreSpan.innerHTML = parseInt(scoreAdder);
    if (parseInt(scoreAdder) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
-//       topLeftPosition.classList.replace('oneer','twoer');
-//       topRightPosition.classList.replace('twoer','oneer');
       }
     else {
       topRightPosition.appendChild(cockShuttle);
-//      topRightPosition.classList.replace('oneer','twoer');
-//      topLeftPosition.classList.replace('twoer','oneer');
         }
-    switchingSides1T();
-//    console.log(topLeftPosition);
-//    console.log(topRightPosition);
+serviceRide2T = parseInt(0);
+ serviceRide1T++;   
+if(serviceRide1T > parseInt(1) ){  
+ switchingSides1T();  
+ console.log(serviceRide1T-1);   
 }
-
+}
 function addScore2T() {
    var cockShuttle = document.getElementById('cock');
 var scoreSpan = document.getElementById('score2');
@@ -109,24 +110,23 @@ var scoreSpan = document.getElementById('score2');
   else{
     bottomLeftPosition.appendChild(cockShuttle);
   }
-  switchingSides2T();  
+   serviceRide1T = parseInt(0); 
+ serviceRide2T++;   
+if( serviceRide2T > parseInt(1) ){  
+ switchingSides2T();  
+ console.log(serviceRide2T-1);   
+}
 }
 function switchingSides1T(){
-  var scoreSpan = document.querySelector('#score1');
-  var scoreAdder = parseInt(scoreSpan.innerHTML); 
      topLeftPosition.classList.toggle('twoer');
      topRightPosition.classList.add('oneer');
      topRightPosition.classList.toggle('twoer');
-}
+   }
 function switchingSides2T(){
- var scoreSpan = document.querySelector('#score2');
-  var scoreAdder = parseInt(scoreSpan.innerHTML); 
      bottomRightPosition.classList.toggle('fourer');
      bottomRightPosition.classList.add('dreier');
      bottomLeftPosition.classList.add('dreier');
      bottomLeftPosition.classList.toggle('fourer');  
-    console.log(bottomRightPosition);
-    console.log(bottomLeftPosition);
 }
 function reduceScore1T() {
     var scoreSpan = document.querySelector('#score1');
