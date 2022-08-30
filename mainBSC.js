@@ -1,7 +1,19 @@
+//declaring variables
 var body = document.body;
 body.classList.add('theme');
 var gridContainer = document.createElement('div');
 body.appendChild(gridContainer);
+var serviceRide1T = 1;
+var serviceRide2T = 1;  
+
+//players objects
+
+function Player() {
+      
+}
+var player1 = new Player();
+    player1.Fname = 'sergei';
+    player1.Lname = 'bubkow';
 //head
 var headContainer = document.createElement('div');
 headContainer.classList.add('head');
@@ -34,14 +46,14 @@ btn1T.innerText = 'Team1';
 headContainer.appendChild(btn1T);
 btn1T.addEventListener('click', addScore1T);
 btn1T.addEventListener('click', winnerOfSet);
-//btn1T.addEventListener('click', intvalPause);
+btn1T.addEventListener('click', intvalPause);
 var btn2T = document.createElement('button');
 btn2T.classList.add('butt');
 btn2T.classList.add('pointbutt');
 btn2T.innerText = 'Team2';
 btn2T.addEventListener('click', addScore2T);
 btn2T.addEventListener('click', winnerOfSet);
-//btn2T.addEventListener('click', intvalPause);
+btn2T.addEventListener('click', intvalPause);
 headContainer.appendChild(btn2T);
 //buttons point-
 var btn1TRed = document.createElement('button');
@@ -60,13 +72,13 @@ btn2TRed.innerText = 'point ↓ T2 ';
 var btnStart = document.createElement('button');
 btnStart.classList.add('startButt');
 btnStart.setAttribute('id', 'starterButt');
-//btnStart.innerText =  ` let's play! `;
+btnStart.innerText =  'start a match' ;
 btnStart.addEventListener('click', cockCreate);
 headContainer.appendChild(btnStart);
 var btnInstaWin = document.createElement('button');
 btnInstaWin.classList.add('btnTry');
 btnInstaWin.addEventListener('click', instantWin);
-btnInstaWin.addEventListener('click', winnerOfSet);
+//btnInstaWin.addEventListener('click', winnerOfSet);
 btnInstaWin.innerText = 'instant win';
 headContainer.appendChild(btnInstaWin);
 // functions
@@ -77,44 +89,54 @@ function instantWin() {
     pointsScore.innerHTML = parseInt(pointAdder);
 }
 //adding and reducing score functions
-var serviceRide1T = 1;
-var serviceRide2T = 1;  
 function addScore1T() {
-  var scoreSpan =document.getElementById('score1');
+  var scoreSpan = document.getElementById('score1');
   var scoreAdder = parseInt(scoreSpan.innerHTML);
   var cockShuttle = document.getElementById('cock');
     scoreAdder ++;
+  scoreSpan.innerHTML = parseInt(scoreAdder);
+    changingTop();
+serviceRide2T = parseInt(0);
+ serviceRide1T++;   
+    if(serviceRide1T > parseInt(1) ){  
+ switchingSides1T();  
+}
+}
+function changingTop(){
+   var scoreSpan =document.getElementById('score1');
+   var scoreAdder = parseInt(scoreSpan.innerHTML);
+   var cockShuttle = document.getElementById('cock');
   scoreSpan.innerHTML = parseInt(scoreAdder);
    if (parseInt(scoreAdder) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
       }
     else {
       topRightPosition.appendChild(cockShuttle);
-        }
-serviceRide2T = parseInt(0);
- serviceRide1T++;   
-if(serviceRide1T > parseInt(1) ){  
- switchingSides1T();  
- console.log(serviceRide1T-1);   
+        } 
 }
+function changingBottom(){
+   var scoreSpan =document.getElementById('score2');
+   var scoreAdder = parseInt(scoreSpan.innerHTML);
+   var cockShuttle = document.getElementById('cock');
+  scoreSpan.innerHTML = parseInt(scoreAdder);
+   if (parseInt(scoreAdder) % 2 == 0) {
+      bottomRightPosition.appendChild(cockShuttle);
+      }
+    else {
+      bottomLeftPosition.appendChild(cockShuttle);
+        } 
 }
 function addScore2T() {
    var cockShuttle = document.getElementById('cock');
-var scoreSpan = document.getElementById('score2');
+   var scoreSpan = document.getElementById('score2');
    var scoreAdder = parseInt(scoreSpan.innerHTML);
     scoreAdder++;
   scoreSpan.innerHTML = parseInt(scoreAdder);
-  if(parseInt(scoreAdder) % 2 == 0){
-    bottomRightPosition.appendChild(cockShuttle);
-  }
-  else{
-    bottomLeftPosition.appendChild(cockShuttle);
-  }
+   changingBottom() ;
    serviceRide1T = parseInt(0); 
- serviceRide2T++;   
+   serviceRide2T++;   
 if( serviceRide2T > parseInt(1) ){  
  switchingSides2T();  
- console.log(serviceRide2T-1);   
 }
 }
 function switchingSides1T(){
@@ -134,12 +156,7 @@ function reduceScore1T() {
     var scoreReducer = parseInt(scoreSpan.innerHTML);
     scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
-     if (parseInt(scoreReducer) % 2 == 0) {
-      topLeftPosition.appendChild(cockShuttle);
-    }
-    else {
-      topRightPosition.appendChild(cockShuttle);
-    }
+    changingTop();
    switchingSides1T();
 }
 function reduceScore2T() {
@@ -148,12 +165,7 @@ function reduceScore2T() {
     var scoreReducer = parseInt(scoreSpan.innerHTML);
     scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
-     if (parseInt(scoreReducer) % 2 == 0) {
-      bottomRightPosition.appendChild(cockShuttle);
-    }
-    else {
-      bottomLeftPosition.appendChild(cockShuttle);
-    }
+    changingBottom();
     switchingSides2T();
     } 
 function negativeScoreAlert() {
@@ -174,7 +186,7 @@ function cockCreate() {
     var score1T = document.getElementById('score1'); 
     var score2T = document.getElementById('score2');
     var starter = document.getElementById('starterButt');
-    const pointButtons = document.querySelectorAll('.butt');
+    var pointButtons = document.querySelectorAll('.butt');
     pointButtons.forEach(function (pointButton){
         pointButton.style.visibility = 'visible';
     });
@@ -208,9 +220,9 @@ function winnerOfSet() {
      winner = 'kokoti from team 2';
       loser = 'team 1';
   gridContainer.appendChild(divWinn);
- paraWinnerInfo.innerText = `${winner} has won`;
+  paraWinnerInfo.innerText = `${winner} has won`;
     }
-    divWinn.appendChild(paraWinnerInfo);
+    
   }
 function nextSet() {
   var score1T = document.getElementById('score1');
@@ -268,7 +280,9 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
         clearTimeout(intPauseSetter);
     gameContainer.removeChild(intvalBreak);
 }
-
+}
+function matchTimer(){
+    var matchTimeCount = setTimeout(matchTimer,1000);
 }
 //game container
 var gameContainer = document.createElement('div');
@@ -278,6 +292,7 @@ var topLeftPosition = document.createElement('div');
 topLeftPosition.setAttribute('class','oneer')
 topLeftPosition.classList.add('players');
 topLeftPosition.innerText = 1;
+//topLeftPosition.innerText = `${player1.name}`;
 var topRightPosition = document.createElement('div');
 topRightPosition.setAttribute('class','twoer');
 topRightPosition.innerText = 2;
@@ -301,7 +316,7 @@ gameContainer.appendChild(bottomRightPosition);
 var divWinn = document.createElement('div');
 divWinn.classList.add('divWinner');
 var paraWinnerInfo = document.createElement('p');
-paraWinnerInfo.setAttribute('id','pinfowin');
+paraWinnerInfo.setAttribute('id','pInfowin');
 divWinn.appendChild(paraWinnerInfo);
 var rstButt = document.createElement('button');
 rstButt.classList.add('butt');
@@ -310,7 +325,6 @@ rstButt.innerText = 'restart match ?';
 rstButt.addEventListener('click',nextSet);
 rstButt.addEventListener('click',function(){
     gridContainer.removeChild(divWinn);
-   var cockShuttle = document.getElementById('cock');
 }
 );
 divWinn.appendChild(rstButt);
