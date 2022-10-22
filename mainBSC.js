@@ -5,15 +5,19 @@ var gridContainer = document.createElement('div');
 body.appendChild(gridContainer);
 var serviceRide1T = 1;
 var serviceRide2T = 1;  
-
+//var matchTimeCount = setTimeout(matchTimer,1000);
+ var matchMinutes, matchSeconds, matchHours;
+matchSeconds = 0;
+matchMinutes = 0;
+matchHours = 0;
 //players objects
 
 function Player() {
       
 }
 var player1 = new Player();
-    player1.Fname = 'sergei';
-    player1.Lname = 'bubkow';
+player1.Fname = 'sergei';
+player1.Lname = 'bubkow';
 //head
 var headContainer = document.createElement('div');
 headContainer.classList.add('head');
@@ -26,7 +30,11 @@ var span1Score = document.createElement('span');
 span1Score.setAttribute('id', 'score1');
 span1Score.classList.add('scoreSpans');
 span1Score.innerHTML = parseInt(0);
+var scoreOfSet1T = document.createElement('span');
+scoreOfSet1T.innerHTML = 0;
+scoreOfSet1T.classList.add('score-Sets');
 headContainer.appendChild(para1T);
+para1T.appendChild(scoreOfSet1T);
 para1T.appendChild(span1Score);
 //team2
 var para2T = document.createElement('p');
@@ -36,8 +44,19 @@ var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
 span2Score.innerHTML = parseInt(0);
 span2Score.classList.add('scoreSpans');
+var scoreOfSet2T = document.createElement('span');
+scoreOfSet2T.innerHTML = 0;
+scoreOfSet2T.classList.add('score-Sets');
 headContainer.appendChild(para2T);
+para2T.appendChild(scoreOfSet2T);
 para2T.appendChild(span2Score);
+
+//matchTimer
+var paraMatchTimer = document.createElement('p');
+headContainer.appendChild(paraMatchTimer);
+paraMatchTimer.setAttribute('id', 'pTimer');
+//paraMatchTimer.innerHTML = 0;
+
 //buttons point+
 var btn1T = document.createElement('button');
 btn1T.classList.add('butt');
@@ -74,11 +93,12 @@ btnStart.classList.add('startButt');
 btnStart.setAttribute('id', 'starterButt');
 btnStart.innerText =  'start a match' ;
 btnStart.addEventListener('click', cockCreate);
+//btnStart.addEventListener('click', matchTimer);
 headContainer.appendChild(btnStart);
 var btnInstaWin = document.createElement('button');
 btnInstaWin.classList.add('btnTry');
 btnInstaWin.addEventListener('click', instantWin);
-//btnInstaWin.addEventListener('click', winnerOfSet);
+btnInstaWin.addEventListener('click', winnerOfSet);
 btnInstaWin.innerText = 'instant win';
 headContainer.appendChild(btnInstaWin);
 // functions
@@ -203,6 +223,7 @@ function cockCreate() {
       score1T.innerHTML = parseInt(0);
      topLeftPosition.appendChild(cockImg); 
     }
+    matchTimer();
 }
 function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
@@ -283,7 +304,28 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
 }
 function matchTimer(){
     var matchTimeCount = setTimeout(matchTimer,1000);
+    matchSeconds++ ;
+    var text;
+if (matchMinutes < 1 && matchHours == 0){    
+    text = `${matchSeconds}s `;
 }
+else if(matchMinutes >= 1 && matchHours == 0 ){
+text =` ${matchMinutes}m  ${matchSeconds}s `;    
+}    
+else if (matchMinutes <= 1 && matchHours > 0){ 
+    text =` ${matchHours}h  ${matchMinutes}m  ${matchSeconds}s `;
+}
+if (matchSeconds == 60){
+matchSeconds = 0;
+matchMinutes++;
+} 
+if (matchMinutes == 60){
+matchMinutes = 0;
+matchHours++;
+}     
+ paraMatchTimer.innerHTML = text;   
+}
+
 //game container
 var gameContainer = document.createElement('div');
 gameContainer.classList.add('game');
