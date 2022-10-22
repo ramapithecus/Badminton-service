@@ -1,0 +1,131 @@
+.theme {
+    font-size: 15pt;
+    background-color: seagreen;
+    display: grid;
+}
+p{
+    width: max-content;
+    margin: 0.5em;
+}
+span{
+    padding: 0.25em;
+}
+.head{
+/*  display: flex;    */
+  background-color: black;
+  color: greenyellow;
+  border: 0.15em inset whitesmoke;
+  margin-bottom: 0.4em;
+}
+.game{
+  display: flex;
+  background-color: saddlebrown;
+  border: 0.18em solid ghostwhite;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-content: center;
+  align-items:center;
+}
+.butt{
+  background-color: grey;
+  visibility: hidden;
+  padding: 0.35em;
+  margin: 0.19em; 
+  font-weight:550;    
+}
+.rstButt{
+    visibility: visible;
+}
+.startButt{
+  width: 25vw;
+  height: 7.5vh;
+  color: black;
+  font-weight:700;    
+  margin-right: 1vw;    
+  background-color: mediumpurple;
+  border: 0.45em ridge olive;
+  border-radius: 35%;
+  text-transform:uppercase;
+}
+.imgCock{
+  border-bottom: 30px solid blanchedalmond;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  width: 0;
+  height: 0;
+  border-radius: 30%;
+}
+.players{
+  text-align: center;
+  background-color: orchid;
+  color:#31413E;/*like black*/
+  border: .11em  solid black;
+  border-radius: 50% ;
+  padding-top: 0.2vh;    
+  margin: 0.8em;
+  width: 4em;
+  height: 4em;
+}
+.oneer{
+  background-color: orange;
+}
+.twoer{
+  background-color: red;
+}
+.dreier{
+  background-color: darkcyan;
+}
+.fourer{
+  background-color: greenyellow;
+}
+.netLine{
+  height: 0.5em;
+  width: 90%;
+  border-top:0.9em dashed black;
+  border-left: 0.5em solid black;
+  border-bottom: 0.9em dashed black;
+  border-right: 0.5em solid black;
+  outline: 0.2em solid white; 
+}
+.divWinner{
+  width: 95%;
+  height: 60vh;
+  background-color: orange;
+  border: 0.3em solid red;
+  z-index: 100;
+  position: fixed;
+  top:2em;
+}
+.btnTry{
+  height: 8.9vh;
+  width: 18vw;
+  border-radius: 25% 60%;
+  color: purple;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 800;
+  padding: 0.5em;
+  margin: inherit;
+}
+.intval{
+    width: 90%;
+    height: 80vh;
+    position: fixed;
+    top: 2em;
+    background-color: beige;
+    border: 0.67em inset slategray;
+    font-size: 0.78em;
+    font-weight: 900;
+    color: maroon;
+    z-index: 100;
+    
+}
+.intvalHeader{
+    text-transform: uppercase;
+    text-align:  center;
+    
+}
+.scoreSpans{
+    
+}
