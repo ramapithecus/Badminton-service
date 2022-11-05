@@ -6,10 +6,12 @@ body.appendChild(gridContainer);
 var serviceRide1T = 1;
 var serviceRide2T = 1;  
 //var matchTimeCount = setTimeout(matchTimer,1000);
- var matchMinutes, matchSeconds, matchHours;
+// var matchTimeCount;
+ var matchMinutes, matchSeconds, matchHours, matchTime;
 matchSeconds = 0;
 matchMinutes = 0;
 matchHours = 0;
+matchTime = 0;
 //players objects
 
 function Player() {
@@ -76,31 +78,47 @@ btn2T.addEventListener('click', intvalPause);
 headContainer.appendChild(btn2T);
 //buttons point-
 var btn1TRed = document.createElement('button');
-btn1TRed.classList.add('butt');
-btn1TRed.addEventListener('click', reduceScore1T);
-btn1TRed.addEventListener('click', negativeScoreAlert);
-headContainer.appendChild(btn1TRed);
-btn1TRed.innerText = 'point ↓T1';
+    btn1TRed.classList.add('butt');
+    btn1TRed.addEventListener('click', reduceScore1T);
+    btn1TRed.addEventListener('click', negativeScoreAlert);
+    headContainer.appendChild(btn1TRed);
+    btn1TRed.innerText = 'point ↓T1';
 var btn2TRed = document.createElement('button');
-btn2TRed.classList.add('butt');
-btn2TRed.addEventListener('click', reduceScore2T);
-btn2TRed.addEventListener('click', negativeScoreAlert);
-headContainer.appendChild(btn2TRed);
-btn2TRed.innerText = 'point ↓ T2 ';
+    btn2TRed.classList.add('butt');
+    btn2TRed.addEventListener('click', reduceScore2T);
+    btn2TRed.addEventListener('click', negativeScoreAlert);
+    headContainer.appendChild(btn2TRed);
+    btn2TRed.innerText = 'point ↓ T2 ';
 //other buttons
 var btnStart = document.createElement('button');
-btnStart.classList.add('startButt');
-btnStart.setAttribute('id', 'starterButt');
-btnStart.innerText =  'start a match' ;
-btnStart.addEventListener('click', cockCreate);
-//btnStart.addEventListener('click', matchTimer);
-headContainer.appendChild(btnStart);
+    btnStart.classList.add('startButt');
+    btnStart.setAttribute('id', 'starterButt');
+    btnStart.innerText =  'start a match' ;
+    btnStart.addEventListener('click', cockCreate);
+    //btnStart.addEventListener('click', matchTimer);
+    headContainer.appendChild(btnStart);
+var pauseBtn = document.createElement('button');
+    pauseBtn.innerText = '||';
+    pauseBtn.setAttribute('id','pause-Btn');
+    pauseBtn.addEventListener('click', pausingGame);          
+function pausingGame(){
+    matchTime = 0;
+    pauseBtn.innerText = '>>';
+    pauseBtn.removeEventListener('click', pausingGame);
+    pauseBtn.addEventListener('click', continueGame);    
+  };
+function continueGame(){
+    matchTime = 1;
+    pauseBtn.innerText = '||';
+    pauseBtn.removeEventListener('click', continueGame);
+    pauseBtn.addEventListener('click', pausingGame);    
+}
 var btnInstaWin = document.createElement('button');
-btnInstaWin.classList.add('btnTry');
-btnInstaWin.addEventListener('click', instantWin);
-btnInstaWin.addEventListener('click', winnerOfSet);
-btnInstaWin.innerText = 'instant win';
-headContainer.appendChild(btnInstaWin);
+    btnInstaWin.classList.add('btnTry');
+    btnInstaWin.addEventListener('click', instantWin);
+    btnInstaWin.addEventListener('click', winnerOfSet);
+    btnInstaWin.innerText = 'instant win';
+    headContainer.appendChild(btnInstaWin);
 // functions
 function instantWin() {
     var pointsScore = document.getElementById('score1');
@@ -223,7 +241,10 @@ function cockCreate() {
       score1T.innerHTML = parseInt(0);
      topLeftPosition.appendChild(cockImg); 
     }
+    matchSeconds = -1;
+    matchTime = 1;
     matchTimer();
+headContainer.appendChild(pauseBtn);    
 }
 function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
@@ -303,9 +324,12 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
 }
 }
 function matchTimer(){
-    var matchTimeCount = setTimeout(matchTimer,1000);
-    matchSeconds++ ;
+   matchTimeCount = setTimeout(matchTimer,1000);
+//   matchSeconds++ ;
     var text;
+if( matchTime == 1){ 
+//    var matchTimeCount = setInterval(matchTimer,1000);
+    matchSeconds++ ;
 if (matchMinutes < 1 && matchHours == 0){    
     text = `${matchSeconds}s `;
 }
@@ -315,15 +339,19 @@ text =` ${matchMinutes}m  ${matchSeconds}s `;
 else if (matchMinutes <= 1 && matchHours > 0){ 
     text =` ${matchHours}h  ${matchMinutes}m  ${matchSeconds}s `;
 }
-if (matchSeconds == 60){
+else if (matchSeconds == 60){
 matchSeconds = 0;
 matchMinutes++;
 } 
-if (matchMinutes == 60){
+else if (matchMinutes == 60){
 matchMinutes = 0;
 matchHours++;
-}     
- paraMatchTimer.innerHTML = text;   
+}
+ if( matchTime == 0) {
+    clearTimeout(matchTimeCount);
+}
+paraMatchTimer.innerHTML = text;     
+}
 }
 
 //game container
