@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+  <title>HTML</title>
+  
+ 
+  <link rel="stylesheet" href="styleBSC.css">
+</head>
+
+<body>
+  <h1> Hello</h1> 
+<p id = 'team1'>Team 1:</p>
+<p id = 'team2'>Team 2:</p>
+    <script >
+var body = document.body;        
+var teamOnePara = document.querySelector('#team1');         
+var teamTwoPara = document.querySelector('#team2');  
+var scoreOfMatchTeamOne = document.createElement('span');
+    scoreOfMatchTeamOne .innerHTML = parseInt(0);
+    teamOnePara.appendChild(scoreOfMatchTeamOne ); 
+var scoreOfFinishedSetTeamOne = document.createElement('span');
+    scoreOfFinishedSetTeamOne.innerHTML = parseInt(0)
+    scoreOfFinishedSetTeamOne.style.visibility = 'hidden';
+    scoreOfFinishedSetTeamOne.style.backgroundColor = ' red'    
+var scoreActualTeamOne = document.createElement('span');
+    scoreActualTeamOne.innerHTML = parseInt(0);
+    scoreActualTeamOne.style.backgroundColor = 'blue';
+    teamOnePara.appendChild(scoreActualTeamOne);        
+var scoreOfMatchTeamTwo = document.createElement('span');
+    scoreOfMatchTeamTwo.innerHTML = parseInt(0);
+    teamTwoPara.appendChild(scoreOfMatchTeamTwo);  
+var scoreOfFinishedSetTeamTwo = document.createElement('span');
+    scoreOfFinishedSetTeamTwo.innerHTML = parseInt(0)
+    scoreOfFinishedSetTeamTwo.style.visibility = 'hidden';
+    scoreOfFinishedSetTeamTwo.style.backgroundColor = ' red'    
+var scoreActualTeamTwo = document.createElement('span');
+    scoreActualTeamTwo.innerHTML = parseInt(0);
+    scoreActualTeamTwo.style.backgroundColor = 'blue';
+    teamTwoPara.appendChild(scoreActualTeamTwo);   
+var buttOne = document.createElement('button');
+        buttOne.innerText = ' +';
+        body.appendChild(buttOne);
+        buttOne.style.padding = '15px' ;
+        buttOne.style.margin = '0.65em ';
+        buttOne.addEventListener('click', addScoreButtOne);
+var buttTwo = document.createElement('button');
+        buttTwo.innerText = ' +';
+        body.appendChild(buttTwo);
+        buttTwo.style.padding = '15px' ;
+        buttTwo.style.margin = '0.65em ';
+        buttTwo.addEventListener('click', addScoreButtTwo);
+var winnerText = document.createElement('div');
+    winnerText.style.height = '150px';
+    winnerText.style.border = '0.2em solid black ';
+    winnerText.style.backgroundColor = 'orange'; 
+var nextSetButt = document.createElement('button');
+    nextSetButt.innerHTML = 'next Set, ready? ';
+    nextSetButt.addEventListener('click', nextSet);
+    winnerText.appendChild(nextSetButt);    
+//    functions
+function addScoreButtOne(){
+    scoreActualTeamOne.innerHTML++;
+    if( parseInt(scoreActualTeamOne.innerHTML) == 5 && parseInt(scoreActualTeamOne.innerHTML) - parseInt(scoreActualTeamTwo.innerHTML) >= 2 
+       || parseInt(scoreActualTeamOne.innerHTML) == 7 && parseInt(scoreActualTeamOne.innerHTML) > parseInt(scoreActualTeamTwo.innerHTML)){
+body.appendChild(winnerText);
+     scoreOfMatchTeamOne.innerHTML++;
+     scoreOfFinishedSetTeamOne = scoreActualTeamOne.innerHTML;
+     scoreOfFinishedSetTeamOne.style.visibility = 'visible ' ;   
+    }
+}
+function addScoreButtTwo(){
+    scoreActualTeamTwo.innerHTML++;
+    if( parseInt(scoreActualTeamTwo.innerHTML) == 5 && parseInt(scoreActualTeamTwo.innerHTML) - parseInt(scoreActualTeamOne.innerHTML) >= 2 
+       || parseInt(scoreActualTeamTwo.innerHTML) == 7 && parseInt(scoreActualTeamTwo.innerHTML) > parseInt(scoreActualTeamOne.innerHTML)){
+body.appendChild(winnerText);
+     scoreOfMatchTeamTwo.innerHTML++;
+     scoreOfFinishedSetTeamTwo = scoreActualTeamTwo.innerHTML;
+     scoreOfFinishedSetTeamTwo.style.visibility = 'visible ' ;   
+    } 
+ 
+}
+function nextSet(){
+    
+}        
+    </script>
+</body>
+</html>
+    

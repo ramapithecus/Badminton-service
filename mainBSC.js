@@ -4,22 +4,19 @@ body.classList.add('theme');
 var gridContainer = document.createElement('div');
 body.appendChild(gridContainer);
 var serviceRide1T = 1;
-var serviceRide2T = 1;  
-//var matchTimeCount = setTimeout(matchTimer,1000);
+var serviceRide2T = 1;
 // var matchTimeCount;
- var matchMinutes, matchSeconds, matchHours, matchTime;
+var matchMinutes, matchSeconds, matchHours, matchTime;
 matchSeconds = 0;
 matchMinutes = 0;
 matchHours = 0;
 matchTime = 0;
 //players objects
-
-function Player() {
-      
+/*function Player() {
 }
 var player1 = new Player();
 player1.Fname = 'sergei';
-player1.Lname = 'bubkow';
+player1.Lname = 'bubkow';*/
 //head
 var headContainer = document.createElement('div');
 headContainer.classList.add('head');
@@ -27,38 +24,38 @@ gridContainer.appendChild(headContainer);
 //team1
 var para1T = document.createElement('p');
 para1T.setAttribute('id', 'paraTeam-1');
-para1T.innerHTML = 'Team1 :';
+para1T.innerHTML = 'Team 1 :';
 var span1Score = document.createElement('span');
 span1Score.setAttribute('id', 'score1');
 span1Score.classList.add('scoreSpans');
 span1Score.innerHTML = parseInt(0);
-var scoreOfSet1T = document.createElement('span');
-scoreOfSet1T.innerHTML = 0;
-scoreOfSet1T.classList.add('score-Sets');
+var setScore1T = document.createElement('span');
+setScore1T.setAttribute('id', 'set_1T')
+setScore1T.innerText = parseInt(0);
+setScore1T.classList.add('scoreSets');
 headContainer.appendChild(para1T);
-para1T.appendChild(scoreOfSet1T);
+para1T.appendChild(setScore1T);
 para1T.appendChild(span1Score);
 //team2
 var para2T = document.createElement('p');
 para2T.setAttribute('id', 'paraTeam-2');
-para2T.innerHTML = 'Team2 :';
+para2T.innerHTML = 'Team 2 :';
 var span2Score = document.createElement('span');
 span2Score.setAttribute('id', 'score2')
 span2Score.innerHTML = parseInt(0);
 span2Score.classList.add('scoreSpans');
-var scoreOfSet2T = document.createElement('span');
-scoreOfSet2T.innerHTML = 0;
-scoreOfSet2T.classList.add('score-Sets');
+var setScore2T = document.createElement('span');
+setScore2T.setAttribute('id', 'set_2T')
+setScore2T.innerHTML = parseInt(0);
+setScore2T.classList.add('scoreSets');
 headContainer.appendChild(para2T);
-para2T.appendChild(scoreOfSet2T);
+para2T.appendChild(setScore2T);
 para2T.appendChild(span2Score);
 
 //matchTimer
 var paraMatchTimer = document.createElement('p');
 headContainer.appendChild(paraMatchTimer);
 paraMatchTimer.setAttribute('id', 'pTimer');
-//paraMatchTimer.innerHTML = 0;
-
 //buttons point+
 var btn1T = document.createElement('button');
 btn1T.classList.add('butt');
@@ -95,7 +92,6 @@ var btnStart = document.createElement('button');
     btnStart.setAttribute('id', 'starterButt');
     btnStart.innerText =  'start a match' ;
     btnStart.addEventListener('click', cockCreate);
-    //btnStart.addEventListener('click', matchTimer);
     headContainer.appendChild(btnStart);
 var pauseBtn = document.createElement('button');
     pauseBtn.innerText = '||';
@@ -113,19 +109,31 @@ function continueGame(){
     pauseBtn.removeEventListener('click', continueGame);
     pauseBtn.addEventListener('click', pausingGame);    
 }
-var btnInstaWin = document.createElement('button');
-    btnInstaWin.classList.add('btnTry');
-    btnInstaWin.addEventListener('click', instantWin);
-    btnInstaWin.addEventListener('click', winnerOfSet);
-    btnInstaWin.innerText = 'instant win';
-    headContainer.appendChild(btnInstaWin);
+var btnInstaWin1T = document.createElement('button');
+    btnInstaWin1T.classList.add('btnTry');
+//    btnInstaWin1T.addEventListener('click', instantWin1T);
+    btnInstaWin1T.addEventListener('click', winnerOfSet);
+    btnInstaWin1T.innerText = 'instant win 1T ';
+    headContainer.appendChild(btnInstaWin1T);
+var btnInstaWin2T = document.createElement('button');
+    btnInstaWin2T.classList.add('btnTry');
+//    btnInstaWin2T.addEventListener('click', instantWin2T);
+    btnInstaWin2T.addEventListener('click', winnerOfSet);
+    btnInstaWin2T.innerText = 'instant win 2T';
+    headContainer.appendChild(btnInstaWin2T);
 // functions
-function instantWin() {
-    var pointsScore = document.getElementById('score1');
-    var pointAdder = parseInt(pointsScore.innerHTML);
-    pointAdder = parseInt(pointAdder + 20);
-    pointsScore.innerHTML = parseInt(pointAdder);
+function instantWin1T() {
+    var pointsScore1T = document.getElementById('score1');
+    var pointAdder1T = parseInt(pointsScore1T.innerHTML);
+    pointAdder1T = parseInt(pointAdder1T + 20);
+    pointsScore1T.innerHTML = parseInt(pointAdder1T);
 }
+ function instantWin2T(){
+    var pointsScore2T = document.getElementById('score2');
+    var pointAdder2T = parseInt(pointsScore2T.innerHTML);
+    pointAdder2T = parseInt(pointAdder2T + 20);
+    pointsScore2T.innerHTML = parseInt(pointAdder2T);
+ }
 //adding and reducing score functions
 function addScore1T() {
   var scoreSpan = document.getElementById('score1');
@@ -244,27 +252,58 @@ function cockCreate() {
     matchSeconds = -1;
     matchTime = 1;
     matchTimer();
-headContainer.appendChild(pauseBtn);    
+    btnInstaWin1T.addEventListener('click', instantWin1T);
+    btnInstaWin2T.addEventListener('click', instantWin2T);
+    headContainer.appendChild(pauseBtn);    
 }
+   
+
+function showingSetResults(){
+//     setScore1T.innerHTML =  scoreSet1T;
+     var scoreResultFinishedSet1T = document.createElement('span');
+     var scoreResultFinishedSet2T = document.createElement('span');
+//     var setScorer1T = document.querySelector('#score1');
+//     var setScorer2T = document.querySelector('#score2');
+      scoreResultFinishedSet1T.classList.add('result_of_sets');
+      scoreResultFinishedSet2T.classList.add('result_of_sets'); 
+      var setResult1T = span1Score.innerHTML;    
+      var setResult2T = span2Score.innerHTML;
+      scoreResultFinishedSet1T.innerHTML = setResult1T; 
+      scoreResultFinishedSet2T.innerHTML = setResult2T; 
+      setScore1T.appendChild(scoreResultFinishedSet1T);
+      setScore2T.appendChild(scoreResultFinishedSet2T);
+//      para1T.appendChild(scoreResultFinishedSet1T);
+//      para2T.appendChild(scoreResultFinishedSet2T);
+     }
 function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
   var score2T = document.getElementById('score2').innerHTML; 
+  var scoreSet1T = parseInt(document.querySelector('#set_1T').innerHTML);
+  var scoreSet2T = parseInt(document.querySelector('#set_2T').innerHTML);   
   var winner, loser;
+     
  if (parseInt(score1T) - parseInt(score2T) >= 2 && parseInt(score1T) >= 21 || parseInt(score1T) == 30 )
-{
+{   
+    matchTime = 0;
     winner = ' kokoti from team 1';
     loser = ' team 2';
-     gridContainer.appendChild(divWinn);
-     paraWinnerInfo.innerHTML = `${winner} has won`;
- }
+    gridContainer.appendChild(divWinn);
+    scoreSet1T++;
+    setScore1T.innerHTML =  scoreSet1T;
+    paraWinnerInfo.innerHTML = `${winner} has won`;
+    showingSetResults(); 
+     }
    if (parseInt(score2T) - parseInt(score1T) >= 2 && parseInt(score2T) >= 21 || parseInt(score2T) == 30 )
- { 
+ {   
+     matchTime = 0;
      winner = 'kokoti from team 2';
-      loser = 'team 1';
-  gridContainer.appendChild(divWinn);
-  paraWinnerInfo.innerText = `${winner} has won`;
+     loser = 'team 1';
+     gridContainer.appendChild(divWinn);
+     paraWinnerInfo.innerText = `${winner} has won`;
+     scoreSet2T++;
+     setScore2T.innerHTML = scoreSet2T ;
+     showingSetResults();
     }
-    
   }
 function nextSet() {
   var score1T = document.getElementById('score1');
@@ -283,6 +322,7 @@ else{
     score2T.innerHTML = parseInt(0);
     btn1T.addEventListener('click',intvalPause);
     btn2T.addEventListener('click',intvalPause);
+    matchTime = 1;
 }
 function intvalPause() {
     var spanScoreT1 = document.querySelector('#score1');
@@ -296,6 +336,7 @@ function intvalPause() {
      
     if(parseInt(scoreT1) == 11 && parseInt(scoreT1) > parseInt(scoreT2)){
         gameContainer.appendChild(intvalBreak);
+        matchTime = 0;
         winner = 'team1';
         loser = team2;
         paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
@@ -305,6 +346,7 @@ function intvalPause() {
     }
    else if(parseInt(scoreT2) == 11 && parseInt(scoreT2) > parseInt(scoreT1)){
         gameContainer.appendChild(intvalBreak);
+        matchTime = 0;
         winner = 'team2';
         loser = team1;
         paraIntvalInfo.innerHTML = `${winner} is winner of interval ` ;
@@ -321,6 +363,7 @@ function intvalTimer() {
 if( parseInt(pIntvalTime.innerHTML) <= 0){
         clearTimeout(intPauseSetter);
     gameContainer.removeChild(intvalBreak);
+    matchTime = 1;
 }
 }
 function matchTimer(){
