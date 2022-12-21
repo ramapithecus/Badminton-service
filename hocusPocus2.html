@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+  <title>BSC hocus pocus #2</title>
+  
+ 
+  <link rel="stylesheet" href="styleBSC.css">
+</head>
+
+<body>
+  
+
+
+    <script >
+var body = document.body;
+//    var resultForm = document.createElement('form')
+//        resultForm.setAttribute('name','rslForm')
+//        body.appendChild(resultForm)
+var inpTeamOne = document.createElement('input')
+    inpTeamOne.classList.add('inpClass')
+    inpTeamOne.setAttribute('name','inp_TeamOne')   
+    inpTeamOne.setAttribute('type','text')
+    inpTeamOne.setAttribute('value','gustavo borsuk');      
+//  resultForm.appendChild(inpTeamOne);
+        body.appendChild(inpTeamOne);
+var inpMatchScoreTeamOne = document.createElement('input')
+    inpMatchScoreTeamOne.classList.add('inpClass')
+    inpMatchScoreTeamOne.setAttribute('name','inp_MatchScoreTeamOne')   
+    inpMatchScoreTeamOne.setAttribute('type','number') 
+    inpMatchScoreTeamOne.setAttribute('readonly','');    
+    inpMatchScoreTeamOne.value = 0;    
+//  resultForm.appendChild(inpMatchScoreTeamOne);
+        body.appendChild(inpMatchScoreTeamOne);
+var inpActualScoreTeamOne = document.createElement('input')
+    inpActualScoreTeamOne.classList.add('inpClass')
+    inpActualScoreTeamOne.setAttribute('name','inp_ActualScoreTeamOne')   
+    inpActualScoreTeamOne.setAttribute('type','number')
+    inpActualScoreTeamOne.setAttribute('min','0')
+    inpActualScoreTeamOne.setAttribute('max', '30')
+    inpActualScoreTeamOne.setAttribute('readonly','');    
+    inpActualScoreTeamOne.value = 0;  
+    inpActualScoreTeamOne.addEventListener('input',addScoreOne);    
+//  resultForm.appendChild(inpActualScoreTeamOne);
+        body.appendChild(inpActualScoreTeamOne);
+    var addScoreButtOne = document.createElement('button')
+    addScoreButtOne.innerHTML = '+';
+    addScoreButtOne.addEventListener('click',addScoreOne);
+    body.appendChild(addScoreButtOne)    
+var jawBreaker = document.createElement('br');
+//resultForm.appendChild(jawBreaker)  ; 
+        body.appendChild(jawBreaker)  ; 
+var inpTeamTwo = document.createElement('input')
+    inpTeamTwo.classList.add('inpClass')
+    inpTeamTwo.setAttribute('name','inp_TeamTwo')   
+    inpTeamTwo.setAttribute('type','text')
+    inpTeamTwo.setAttribute('value','Michelito gonzales');      
+//  resultForm.appendChild(inpTeamTwo);
+        body.appendChild(inpTeamTwo);
+var inpMatchScoreTeamTwo = document.createElement('input')
+    inpMatchScoreTeamTwo.classList.add('inpClass')
+    inpMatchScoreTeamTwo.setAttribute('name','inp_MatchScoreTeamTwo')   
+    inpMatchScoreTeamTwo.setAttribute('type','number')
+    inpMatchScoreTeamTwo.setAttribute('readonly','');   
+    inpMatchScoreTeamTwo.value = 0;
+//  resultForm.appendChild(inpMatchScoreTeamTwo);
+        body.appendChild(inpMatchScoreTeamTwo);
+var inpActualScoreTeamTwo = document.createElement('input')
+    inpActualScoreTeamTwo.classList.add('inpClass')
+    inpActualScoreTeamTwo.setAttribute('name','inp_ActualScoreTeamTwo')   
+    inpActualScoreTeamTwo.setAttribute('type','number')
+    inpActualScoreTeamTwo.setAttribute('min','0')
+    inpActualScoreTeamTwo.setAttribute('max', '30')
+    inpActualScoreTeamTwo.setAttribute('readonly','');    
+    inpActualScoreTeamTwo.value = 0; 
+    inpActualScoreTeamTwo.addEventListener('input',addScoreTwo);    
+//  resultForm.appendChild(inpActualScoreTeamTwo);
+        body.appendChild(inpActualScoreTeamTwo);
+    var addScoreButtTwo = document.createElement('button')
+    addScoreButtTwo.innerHTML = '+';
+    addScoreButtTwo.addEventListener('click',addScoreTwo);
+    body.appendChild(addScoreButtTwo)    
+//functions
+ function addScoreOne(){
+     inpActualScoreTeamOne.value++;
+     if(inpActualScoreTeamOne.value >=5){
+        inpMatchScoreTeamOne.value++;
+        var finishedSetScoreOne = document.createElement('input');
+            finishedSetScoreOne.value = inpActualScoreTeamOne.value;
+         var finishedSetScoreTwo = document.createElement('input');
+            finishedSetScoreTwo.value = inpActualScoreTeamTwo.value;
+        body.appendChild(finishedSetScoreOne);    
+        body.appendChild(finishedSetScoreTwo);    
+        inpActualScoreTeamOne.value = 0; 
+        inpActualScoreTeamTwo.value = 0; 
+     }
+ } 
+function addScoreTwo(){
+     inpActualScoreTeamTwo.value++;
+     if(inpActualScoreTeamTwo.value >=5){
+        inpMatchScoreTeamTwo.value++;
+       var finishedSetScoreOne = document.createElement('input');
+            finishedSetScoreOne.value = inpActualScoreTeamOne.value;
+        var finishedSetScoreTwo = document.createElement('input');
+            finishedSetScoreTwo.value = inpActualScoreTeamTwo.value;
+        body.appendChild(finishedSetScoreOne);    
+        body.appendChild(finishedSetScoreTwo);    
+        inpActualScoreTeamOne.value = 0; 
+        inpActualScoreTeamTwo.value = 0; 
+     }
+ }         
+    </script>
+</body>
