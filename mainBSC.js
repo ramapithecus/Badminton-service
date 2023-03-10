@@ -48,7 +48,7 @@ var divT2 = document.createElement('div');
 headContainer.appendChild(divT2);
 divT2.classList.add('teamResults');
 var para2T = document.createElement('div');
-para2T.setAttribute('id', 'paraTeam-2');
+para2T.setAttribute('id', 'nameTeam-2');
 para2T.innerHTML = 'Team 2 :';
 divT2.appendChild(para2T);
 var matchScore2T = document.createElement('div');
@@ -172,7 +172,7 @@ divWinn.appendChild(paraWinnerInfo);
 var rstButt = document.createElement('button');
 rstButt.classList.add('butt');
 rstButt.classList.add('rstButt');
-rstButt.innerText = 'restart match ?';
+rstButt.innerText = ' next set?';
 rstButt.addEventListener('click',nextSet);
 divWinn.appendChild(rstButt);
 // intervalBreak container
@@ -199,6 +199,8 @@ function instantWin1T() {
     var pointsScore1T = document.getElementById('score1');
     var pointAdder1T = parseInt(pointsScore1T.innerHTML);
     pointAdder1T = parseInt(pointAdder1T + 20);
+//    addScore1T();
+//    changingTop();
     pointsScore1T.innerHTML = parseInt(pointAdder1T);
     winnerOfSet();
 }
@@ -206,6 +208,8 @@ function instantWin1T() {
     var pointsScore2T = document.getElementById('score2');
     var pointAdder2T = parseInt(pointsScore2T.innerHTML);
     pointAdder2T = parseInt(pointAdder2T + 20);
+//    addScore2T();
+//    changingBottom();
     pointsScore2T.innerHTML = parseInt(pointAdder2T);
     winnerOfSet(); 
  }
@@ -216,11 +220,11 @@ function addScore1T() {
   var cockShuttle = document.getElementById('cock');
     scoreAdder ++;
   scoreSpan.innerHTML = parseInt(scoreAdder);
-    changingTop();
 serviceRide2T = parseInt(0);
- serviceRide1T++;   
+ serviceRide1T++;
+   changingTop();
     if(serviceRide1T > parseInt(1) ){  
- switchingSides1T();  
+ switchingSidesTop();  
 }
 }
 function changingTop(){
@@ -257,15 +261,16 @@ function addScore2T() {
    serviceRide1T = parseInt(0); 
    serviceRide2T++;   
 if( serviceRide2T > parseInt(1) ){  
- switchingSides2T();  
+ switchingSidesBottom();  
 }
 }
-function switchingSides1T(){
+function switchingSidesTop(){
+    
      topLeftPosition.classList.toggle('twoer');
      topRightPosition.classList.add('oneer');
      topRightPosition.classList.toggle('twoer');
    }
-function switchingSides2T(){
+function switchingSidesBottom(){
      bottomRightPosition.classList.toggle('fourer');
      bottomRightPosition.classList.add('dreier');
      bottomLeftPosition.classList.add('dreier');
@@ -278,7 +283,7 @@ function reduceScore1T() {
     scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
     changingTop();
-   switchingSides1T();
+   switchingSidesTop();
 }
 function reduceScore2T() {
     var scoreSpan = document.querySelector('#score2');
@@ -287,7 +292,7 @@ function reduceScore2T() {
     scoreReducer--;
     scoreSpan.innerHTML = parseInt(scoreReducer);
     changingBottom();
-    switchingSides2T();
+    switchingSidesBottom();
     } 
 function negativeScoreAlert() {
   var spanScoreT1 = document.querySelector('#score1');
@@ -303,6 +308,7 @@ function negativeScoreAlert() {
         addScore2T();
     }
 }
+//functions of deciding results
 function cockCreate() {
     var score1T = document.getElementById('score1'); 
     var score2T = document.getElementById('score2');
@@ -325,8 +331,8 @@ function cockCreate() {
      topLeftPosition.appendChild(cockImg); 
     }
     matchSeconds = -1;
-    matchTime = 1;
     matchTimer();
+    matchTime = 1;
     btnInstaWin1T.addEventListener('click', instantWin1T);
     btnInstaWin2T.addEventListener('click', instantWin2T);
     headContainer.appendChild(pauseBtn);    
@@ -342,16 +348,27 @@ function cockCreate() {
       divT2.removeChild(scoreActual2T);
       divT1.appendChild(scoreResultFinishedSet1T);
       divT2.appendChild(scoreResultFinishedSet2T);
-      divT1.appendChild(scoreActual1T);
-      divT2.appendChild(scoreActual2T);
       scoreActual1T.innerHTML = parseInt(0);
       scoreActual2T.innerHTML = parseInt(0);
-//      divT1.appendChild(scoreResultFinishedSet1T);
-//      divT2.appendChild(scoreResultFinishedSet2T);
-//      matchScore1T.appendChild(scoreResultFinishedSet1T);
-//      matchScore2T.appendChild(scoreResultFinishedSet2T);
-//      scoreActual1T.innerHTML = parseInt(0);
-//      scoreActual2T.innerHTML = parseInt(0);
+      divT1.appendChild(scoreActual1T);
+      divT2.appendChild(scoreActual2T);
+      if (parseInt(scoreResultFinishedSet1T.innerHTML) > parseInt(scoreResultFinishedSet2T.innerHTML) ){
+    scoreActual1T.innerHTML = -1;
+//    reduceScore1T()
+    addScore1T();
+//    changingTop();
+    btn1T.addEventListener('click',intvalPause);
+    btn2T.addEventListener('click',intvalPause);
+}
+else{
+    scoreActual2T.innerHTML = -1;
+//    reduceScore2T()
+    addScore2T();
+//    changingBottom();
+    btn1T.addEventListener('click',intvalPause);
+    btn2T.addEventListener('click',intvalPause);
+}   
+      
      }
 function winnerOfSet() {
   var score1T = document.getElementById('score1').innerHTML;
@@ -368,7 +385,8 @@ function winnerOfSet() {
     gridContainer.appendChild(divWinn);
     scoreSet1T++;
     matchScore1T.innerHTML =  scoreSet1T;
-    paraWinnerInfo.innerHTML = `${winner} has won`;
+    paraWinnerInfo.innerHTML = `${winner} had won, ${loser} had lost`;
+    winnerOfTheMatch()
     showingSetResults(); 
      }
    if (parseInt(score2T) - parseInt(score1T) >= 2 && parseInt(score2T) >= 21 || parseInt(score2T) == 30 )
@@ -379,29 +397,49 @@ function winnerOfSet() {
      gridContainer.appendChild(divWinn);
      scoreSet2T++;
      matchScore2T.innerHTML = scoreSet2T ;
-     paraWinnerInfo.innerHTML = `${winner} has won`;
+     paraWinnerInfo.innerHTML = `${winner} has won, ${loser} had lost`;
+     winnerOfTheMatch()
      showingSetResults();
     }
   }
+function winnerOfTheMatch(){
+  var scoreSet1T = parseInt(document.querySelector('#set_1T').innerHTML);
+  var scoreSet2T = parseInt(document.querySelector('#set_2T').innerHTML); 
+  var winner, loser;
+   if( scoreSet1T == 2 || scoreSet2T == 2){
+      matchTime = 0; 
+      divT1.removeChild(scoreActual1T);
+      divT2.removeChild(scoreActual2T);
+   
+    if(scoreSet1T > scoreSet2T ){
+     winner = 'team 1';
+     loser = 'team 2'    
+    }
+    else{
+     winner = 'team 2';
+     loser = 'team 1'     
+    }   
+     paraWinnerInfo.innerHTML = `${winner} has won the match, ${loser} had lost`;  
+    rstButt.innerText = 'restart match ?';
+//    rstButt.removeEventListener('click',nextSet); 
+    rstButt.addEventListener('click',function(){
+        location.reload();
+    }
+    );   
+   } 
+    
+}
 function nextSet() {
+ var scoreSet1T = document.getElementById('set_1T');
   var score1T = document.getElementById('score1');
+//  var previousSet1T = document.querySelector();      
+  var scoreSet2T = document.getElementById('set_2T');
   var score2T = document.getElementById('score2');
+//  var previousSet1T = document.querySelector();    
   var winner, loser; 
   gridContainer.removeChild(divWinn);
     matchTime = 1;
-if (parseInt(score1T.innerHTML) > parseInt(score2T.innerHTML) ){
-score1T.innerHTML = parseInt(-1);
-    addScore1T();
-}
-else{
-    score2T.innerHTML = parseInt(-1);
-    addScore2T();    
-}   
     gridContainer.removeChild(divWinn);
-    score1T.innerHTML = parseInt(0);
-    score2T.innerHTML = parseInt(0);
-    btn1T.addEventListener('click',intvalPause);
-    btn2T.addEventListener('click',intvalPause);
 }
 function intvalPause() {
     var spanScoreT1 = document.querySelector('#score1');
@@ -409,7 +447,7 @@ function intvalPause() {
     var team1 = document.getElementById('nameTeam-1').innerText;
     var spanScoreT2 = document.querySelector('#score2');
     var scoreT2 = spanScoreT2.innerHTML;
-    var team2 = document.getElementById('paraTeam-2').innerHTML;
+    var team2 = document.getElementById('nameTeam-2').innerHTML;
     paraIntvalTimer.innerHTML = parseInt(60);
     var winner, loser;
      
@@ -446,28 +484,26 @@ if( parseInt(pIntvalTime.innerHTML) <= 0){
 }
 }
 function matchTimer(){
-   matchTimeCount = setTimeout(matchTimer,1000);
+  var matchTimeCount = setTimeout(matchTimer,1000);
 //   matchSeconds++ ;
     var text;
 if( matchTime == 1){ 
-//    var matchTimeCount = setInterval(matchTimer,1000);
     matchSeconds++ ;
-if (matchMinutes < 1 && matchHours == 0){    
     text = `${matchSeconds}s `;
-}
-else if(matchMinutes >= 1 && matchHours == 0 ){
-text =` ${matchMinutes}m  ${matchSeconds}s `;    
-}    
-else if (matchMinutes <= 1 && matchHours > 0){ 
-    text =` ${matchHours}h  ${matchMinutes}m  ${matchSeconds}s `;
-}
-else if (matchSeconds == 60){
+if (matchSeconds == 60 ){
 matchSeconds = 0;
 matchMinutes++;
+}
+if(matchMinutes > 0){    
+text =` ${matchMinutes}m  ${matchSeconds}s `;       
 } 
-else if (matchMinutes == 60){
+if(matchMinutes == 60 ){
 matchMinutes = 0;
+matchSeconds = 0;
 matchHours++;
+}
+if (matchHours > 0){   
+ text =` ${matchHours}h  ${matchMinutes}m  ${matchSeconds}s `;    
 }
  if( matchTime == 0) {
     clearTimeout(matchTimeCount);
