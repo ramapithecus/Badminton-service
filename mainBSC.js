@@ -222,6 +222,7 @@ function addScore1T() {
   scoreSpan.innerHTML = parseInt(scoreAdder);
 serviceRide2T = parseInt(0);
  serviceRide1T++;
+    
    changingTop();
     if(serviceRide1T > parseInt(1) ){  
  switchingSidesTop();  
@@ -231,7 +232,7 @@ function changingTop(){
    var scoreSpan =document.getElementById('score1');
    var scoreAdder = parseInt(scoreSpan.innerHTML);
    var cockShuttle = document.getElementById('cock');
-  scoreSpan.innerHTML = parseInt(scoreAdder);
+//  scoreSpan.innerHTML = parseInt(scoreAdder);
    if (parseInt(scoreAdder) % 2 == 0) {
       topLeftPosition.appendChild(cockShuttle);
       }
@@ -386,8 +387,8 @@ function winnerOfSet() {
     scoreSet1T++;
     matchScore1T.innerHTML =  scoreSet1T;
     paraWinnerInfo.innerHTML = `${winner} had won, ${loser} had lost`;
-    winnerOfTheMatch()
     showingSetResults(); 
+    winnerOfTheMatch()
      }
    if (parseInt(score2T) - parseInt(score1T) >= 2 && parseInt(score2T) >= 21 || parseInt(score2T) == 30 )
  {   
@@ -398,8 +399,8 @@ function winnerOfSet() {
      scoreSet2T++;
      matchScore2T.innerHTML = scoreSet2T ;
      paraWinnerInfo.innerHTML = `${winner} has won, ${loser} had lost`;
-     winnerOfTheMatch()
      showingSetResults();
+     winnerOfTheMatch()
     }
   }
 function winnerOfTheMatch(){
