@@ -1,3 +1,7 @@
+
+:root{
+   --sizeOfPlayers: 5em;
+}
 .theme {
     font-size: 15pt;
     background-color: seagreen;
@@ -31,8 +35,13 @@ span{
   background-color: grey;
   visibility: hidden;
   padding: 0.35em;
-  margin: 0.19em; 
-  font-weight:550;    
+  margin: 0.29em; 
+  height: 2.2em;    
+  font-weight:550;
+  }
+.butt:active{
+    background-color: aquamarine;
+    height: 3em;
 }
 .rstButt{
     visibility: visible;
@@ -64,12 +73,12 @@ span{
   border-radius: 50% ;
   padding-top: 0.2vh;    
   margin: 0.8em;
-  width: 4em;
-  height: 4em;
+  width: var(--sizeOfPlayers) ;
+  height: var( --sizeOfPlayers) ;
 }
 .oneer{
-  background-color: orange;
-}
+  background-color: darkorange;
+      }
 .twoer{
   background-color: red;
 }
@@ -124,8 +133,19 @@ span{
 .intvalHeader{
     text-transform: uppercase;
     text-align:  center;
-    
-}
+    }
 .scoreSpans{
-    
+    color: aqua;
+}
+.scoreSets {
+    color: red;
+    background-color: yellow;
+/*    border-left: 0.3em solid black;*/
+    margin-right: 0.12em;
+    margin-left: 0.22em;
+}
+.result_of_sets {
+    color: black;
+/*    border-right: 0.25em solid black ;*/
+    border-left: 0.18em solid black;
 }
